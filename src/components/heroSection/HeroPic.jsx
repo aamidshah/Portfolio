@@ -14,7 +14,7 @@ const HeroPic = () => {
           viewport={{once: false, amount: 0}}
     
     className='h-full flex justify-center items-center mt-16  md:ml-auto md:mr-16'>
-      <img src="../../public/images/MyHexaPic.png" alt="Shah Aamid" className='md:max-h-[450px] max-h-[300px] w-auto '  />
+      <img src="/images/MyHexaPic.png" alt="Shah Aamid" className='md:max-h-[450px] max-h-[300px] w-auto '  />
       <div className='absolute -z-10 flex justify-center items-center animate-pulse  '>
       <PiHexagonThin className='md:h-[80%] sm:h-[90%] md:min-h-[530px] min-h-[430px] w-auto text-cyan blur-md animate-[spin_20s_linear_infinite]' />
 
