@@ -11,7 +11,7 @@ const projects = [
     name:"Portfolio-Website",
     year:'november-2023',
     align:'left',
-    image:'/images/website-img-2.jpg',
+    image:'/images/website-img-1.jpg',
     link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/"
 
   },
