@@ -9,7 +9,7 @@ const SubSkills = () => {
 
 <div className='relative border-y-2 border-lightGrey lg:mt-[250px]  '>
 <div className="absolute  bg-gradient-custom2 opacity-50 w-full h-full"></div>
-<img src="../../public/images/subSkills.jpg" alt="Sub-Skills Image " />
+<img src="/images/subSkills.jpg" alt="Sub-Skills Image " />
 </div>
   )
 }
