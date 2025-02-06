@@ -6,6 +6,15 @@ import { FadeIn } from '../../framerMotion/Variants'
 
 
 const projects = [
+
+  {
+    name:"Portfolio-Website",
+    year:'november-2023',
+    align:'left',
+    image:'/images/website-img-2.jpg',
+    link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/"
+
+  },
   {
     name:"Advance Filtering",
     year:2024,
