@@ -25,7 +25,7 @@ const HeroText = () => {
       viewport={{once: false, amount: 0}}
       
       className='text-lg mt-4 text-white  '>A Passionate Developer Dedicated to <br /> Building Creative  and Functional 
-       Web Solutions for   </motion.p>
+       Web Solutions  </motion.p>
     </div>
   )
 }

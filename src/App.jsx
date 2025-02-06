@@ -13,7 +13,7 @@ import FooterMain from './components/footer/FooterMain'
 
 const hello  = () => {
   return (
-    <main className='font-sans'>
+    <main className='font-sans overflow-hidden'>
       <NavBarMain />
       <HeroMain />  
       <SubHeroSection />

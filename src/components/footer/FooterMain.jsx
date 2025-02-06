@@ -49,7 +49,7 @@ const FooterMain = () => {
       </ul>
 
         </div>
-      <p className='text-lightBrown max-w-[1900px] text-right mt-2 mb-12 text-sm'>2025 Shah Aamid | All Rights Reserved</p>
+      <p className='text-lightBrown max-w-[1900px] text-center md:text-right mt-2 mb-12 text-sm '>2025 Shah Aamid | All Rights Reserved</p>
     </div>
   )
 }

@@ -1,5 +1,7 @@
 import React from "react";
 import{Link} from "react-scroll"
+import { motion } from 'framer-motion';
+import { FadeIn } from '../../framerMotion/Variants'
 
 const links = [
   {
@@ -30,7 +32,16 @@ const NavBarLinks = () => {
 
     {
       links.map((link,index)=>{
-        return <li key={index} className="group">
+        return(
+        <motion.div key={index}
+        variants={FadeIn('down',0.1,index)}
+        initial="hidden"
+        viewport={{ once: false, amount: 0.7}}
+        whileInView="show"
+        className="group"
+
+        >
+        <li key={index} className="group">
           <Link to={link.section} 
            smooth={true}
            spy={true}
@@ -39,6 +50,7 @@ const NavBarLinks = () => {
            className="cursor-pointer hover:text-[var(--cyan)] transition-all duration-500">{link.link}</Link>
           <div className="mx-auto bg-cyan w-0 group-hover:w-full h-[1px] transition-all duration-500 "></div>
         </li>
+        </motion.div>)
       })
     }
   </ul>

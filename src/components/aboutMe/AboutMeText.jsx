@@ -13,7 +13,9 @@ const AboutMeText = ({}) => {
       <p 
       
 
-      className=' text-white max-w-[1200px]'>The sun dipped below the horizon, casting a warm glow over the quiet town. Birds chirped in the distance as the evening breeze rustled the leaves of nearby trees. People slowly returned to their homes, the streets becoming less crowded with each passing moment. The sky transitioned from shades of pink and orange to deep blues and purples, creating a breathtaking display of nature’s beauty. In the calm of the night, the world seemed to pause, allowing for reflection and tranquility. It was one of those rare moments where everything felt perfectly aligned, as if time itself had slowed down.</p>
+      className=' text-white max-w-[1200px]'>I am a passionate and motivated MCA student currently exploring the exciting world of software development. As a fresher, I am continuously learning and improving my skills in web development, problem-solving, and creating software solutions that make an impact.
+
+      With a strong foundation in React, JavaScript, and Tailwind CSS, I love building intuitive and user-friendly web applications. I am always eager to explore new technologies and enhance my expertise in full-stack development.</p>
    
    <div className='flex flex-row gap-4'>
    <Link to='projects'
