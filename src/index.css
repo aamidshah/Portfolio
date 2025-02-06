@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Elite&display=swap');
+
+@import "tailwindcss";
+
+
+/* screen:{
+
+} */
+:root {
+  --brown: #53423e;
+  --lightBrown: #645550;
+  --darkBrown: #2c2523;
+  --black: #1e1917;
+  --white: #f1e1d9;
+  --cyan: #15d1e9;
+  --lightCyan: #88e5f0;
+  --darkCyan: #009fb3;
+  --orange: #fb9718;
+  --lightOrange: #fac27b;
+  --darkOrange: #d28422;
+  --grey: #626965;
+  --lightGrey: #978580;
+  --darkGrey: #3f4441;
+}
+
+/* Add Utility Classes */
+.bg-brown {
+  background-color: var(--brown);
+}
+
+.text-brown {
+  color: var(--brown);
+}
+
+.bg-lightBrown {
+  background-color: var(--lightBrown);
+}
+
+.text-lightBrown {
+  color: var(--lightBrown);
+}
+
+.bg-darkBrown {
+  background-color: var(--darkBrown);
+}
+
+.text-darkBrown {
+  color: var(--darkBrown);
+}
+
+.bg-black {
+  background-color: var(--black);
+}
+
+.text-black {
+  color: var(--black);
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.text-white {
+  color: var(--white);
+}
+
+.bg-cyan {
+  background-color: var(--cyan);
+}
+
+.text-cyan {
+  color: var(--cyan);
+}
+
+.bg-lightCyan {
+  background-color: var(--lightCyan);
+}
+
+.text-lightCyan {
+  color: var(--lightCyan);
+}
+
+.bg-darkCyan {
+  background-color: var(--darkCyan);
+}
+
+.text-darkCyan {
+  color: var(--darkCyan);
+}
+
+.bg-orange {
+  background-color: var(--orange);
+}
+
+.text-orange {
+  color: var(--orange);
+}
+.border-orange {
+  border-color: var(--orange);
+}
+
+.bg-lightOrange {
+  background-color: var(--lightOrange);
+}
+
+.text-lightOrange {
+  color: var(--lightOrange);
+}
+
+.bg-darkOrange {
+  background-color: var(--darkOrange);
+}
+
+.text-darkOrange {
+  color: var(--darkOrange);
+}
+
+.bg-grey {
+  background-color: var(--grey);
+}
+
+.text-grey {
+  color: var(--grey);
+}
+
+.bg-lightGrey {
+  background-color: var(--lightGrey);
+}
+
+.text-lightGrey {
+  color: var(--lightGrey);
+}
+
+.bg-darkGrey {
+  background-color: var(--darkGrey);
+}
+
+.text-darkGrey {
+  color: var(--darkGrey);
+}
+
+
+
+body {
+  background-color: var(--darkBrown);
+}
+
+.bg-gradient-custom {
+  background: linear-gradient(to right, var(--cyan), var(--orange));
+}
+
+.bg-gradient-custom2 {
+  background: linear-gradient(to right, var(--orange), var(--cyan));
+}
+
