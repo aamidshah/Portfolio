@@ -13,7 +13,7 @@ const projects = [
     align:'left',
     image:'/images/Portfolio.png',
     link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/",
-    technologies: " React|TailwindCSS |Framer Motion "
+    technologies: " React|TailwindCSS|Framer Motion|JS "
 
   },
   {
@@ -22,7 +22,7 @@ const projects = [
     align:'right',
     image:'/images/website-img-1.jpg',
     link:"https://github.com/aamidshah/Advance-Filtering",
-    technologies: " React|TailwindCSS |Framer Motion | Node.js | Express.js | MongoDB "
+    technologies: " React|TailwindCSS|Javascript|CSS"
 
   },
 
@@ -32,7 +32,7 @@ const projects = [
     align:'left',
     image:'/images/Netflix.png',
     link:"https://mern-netflix-clone-lp9d.onrender.com/",
-    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
+    technologies: " React|Redux|TailwindCSS|Node.js | Express.js | MongoDB-Compass "
 
   },
 
@@ -42,7 +42,7 @@ const projects = [
     align:'right',
     image:'/images/website-img-3.jpg',
     link:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
-    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
+    technologies: " React|Redux |TailwindCSS | Node.js | Express.js | MongoDB "
 
   },
   
@@ -52,7 +52,7 @@ const projects = [
     align:'left',
     image:'/images/StudyBuddy.png',
     link:"https://github.com/aamidshah/StudyBuddy-webapp",
-    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
+    technologies: "Html| CSS| Django| SQLite "
   }
   
 

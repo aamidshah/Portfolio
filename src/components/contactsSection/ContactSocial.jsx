@@ -17,7 +17,7 @@ const socialLinks= [
   },
   {
     id: 3,
-    link: "https://instagram.com",
+    link: "https://www.instagram.com/billibokut02?igsh=MTVkZHIyaThvN2V6bA==",
     Icon: IoLogoInstagram,
   }
 ]

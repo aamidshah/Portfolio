@@ -20,7 +20,7 @@ const hello  = () => {
       <AboutMeMain />
       <SkillsMain />
       <SubSkills/>
-      <ExperienceMain />
+      {/* <ExperienceMain /> */}
       <ProjectMain />
       <ContactMain />
       <FooterMain />

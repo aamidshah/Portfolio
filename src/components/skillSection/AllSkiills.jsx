@@ -10,6 +10,7 @@ import SingleSkill from './SingleSkill';
 import { FaPython } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
+import { FaNodeJs } from "react-icons/fa";
 
 
 
@@ -29,11 +30,11 @@ const skills =[
     skill: 'JavaScript',
     icon: IoLogoJavascript
   },
-  {
-    skill: 'typescript',
-    icon: SiTypescript
+  // {
+  //   skill: 'typescript',
+  //   icon: SiTypescript
 
-  },
+  // },
   
   {
     skill: 'React',
@@ -51,6 +52,14 @@ const skills =[
     skill: 'python',
     icon: FaPython
 
+  },
+  {
+    skill: 'Node.js',
+    icon: FaNodeJs
+  },
+  {
+    skill: 'Express.js',
+    icon: FaNodeJs
   }
 ]
 
