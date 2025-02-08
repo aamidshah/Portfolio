@@ -5,7 +5,7 @@ import { FadeIn } from '../../framerMotion/Variants'
 import { Link } from 'react-scroll';
 
 
-const SingleProject = ({name,year,align,image,link}) => {
+const SingleProject = ({name,year,align,image,tech,link}) => {
   return (
     <motion.div
     variants={FadeIn('up', 0.2) }
@@ -17,9 +17,11 @@ const SingleProject = ({name,year,align,image,link}) => {
     className={`flex w-full sm:flex-col-reverse items-center gap-8 ${align === 'left' ? 'md:flex-row': ' md:flex-row-reverse'} justify-end lg:justify-evenly`}>
       <div>
         <h2 className='md:text-3xl text-2xl text-orange '>{name}</h2>
-        <h2 className= {`text-xl font-thin text-white font-special sm:text-center ${ align === 'left' ? 'md:text-right' : 'md:text-left'}  `}>{year}</h2>
+        <h2 className= {`text-xl  text-white font-semibold font-special sm:text-center ${ align === 'left' ? 'md:text-left' : 'md:text-left'}  `}>{year}</h2>
+        <h2 className= {`text-[16px] font-thin text-white font-special sm:text-center ${ align === 'left' ? 'md:text-left' : 'md:text-left'}  `}>{tech}</h2>
 
-        <a href={link} className={`text-lg flex gap-2 items-center text-cyan hover:!text-[var(--white)] transition-all duration-500  cursor-pointer sm:justify-self-center ${align === 'left' ? 'md:justify-self-end' : 'md:justify-self-start'} `}>view <BiSolidRightTopArrowCircle />
+
+        <a href={link} className={`text-lg flex gap-2 items-center text-cyan hover:!text-[var(--white)] transition-all duration-500  cursor-pointer sm:justify-self-center ${align === 'left' ? 'md:justify-self-start' : 'md:justify-self-start'} `}>view <BiSolidRightTopArrowCircle />
         </a>
 
       </div>

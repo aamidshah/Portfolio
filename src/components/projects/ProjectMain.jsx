@@ -11,8 +11,9 @@ const projects = [
     name:"Portfolio-Website",
     year:'november-2023',
     align:'left',
-    image:'/images/website-img-1.jpg',
-    link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/"
+    image:'/images/Portfolio.png',
+    link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/",
+    technologies: " React|TailwindCSS |Framer Motion "
 
   },
   {
@@ -20,7 +21,8 @@ const projects = [
     year:2024,
     align:'right',
     image:'/images/website-img-1.jpg',
-    link:"https://github.com/aamidshah/Advance-Filtering"
+    link:"https://github.com/aamidshah/Advance-Filtering",
+    technologies: " React|TailwindCSS |Framer Motion | Node.js | Express.js | MongoDB "
 
   },
 
@@ -28,8 +30,9 @@ const projects = [
     name:"NetFlix-Clone",
     year:'october-2024',
     align:'left',
-    image:'/images/website-img-1.jpg',
-    link:"https://mern-netflix-clone-lp9d.onrender.com/"
+    image:'/images/Netflix.png',
+    link:"https://mern-netflix-clone-lp9d.onrender.com/",
+    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
 
   },
 
@@ -38,7 +41,8 @@ const projects = [
     year:"june-2023",
     align:'right',
     image:'/images/website-img-3.jpg',
-    link:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER"
+    link:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
+    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
 
   },
   
@@ -46,8 +50,9 @@ const projects = [
     name:" Studdy-Buddy Web-App ",
     year:'september-2024',
     align:'left',
-    image:'/images/website-img-4.jpg',
-    link:"http://localhost:5173/"
+    image:'/images/StudyBuddy.png',
+    link:"https://github.com/aamidshah/StudyBuddy-webapp",
+    technologies: " React|Redux | Firebase | TailwindCSS | Framer Motion | Node.js | Express.js | MongoDB "
   }
   
 
@@ -68,7 +73,7 @@ const ProjectMain = () => {
       <div className='flex flex-col gap-20  m-w-[900px] mx-auto mt-12 lg:items-center '>
       {
         projects.map((item,index)=>{
-          return <SingleProject key={index} name={item.name} year={item.year} align={item.align} image={item.image} link={item.link} />
+          return <SingleProject key={index} name={item.name} year={item.year} tech={item.technologies} align={item.align} image={item.image} link={item.link} />
         })
       }
 
