@@ -78,7 +78,7 @@ export const projects = [
     '/images/Portfolio.png',
     '/images/Portfolio.png'
   ],
-    link:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
+    link:"https://mern-stack-event-handler.vercel.app/",
     gitLink:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
     technologies: " React|Redux |TailwindCSS | Node.js | Express.js | MongoDB ",
     description: "A simple web application for managing events using React, Redux, and Tailwind CSS, along with a Node.js backend using Express.js and MongoDB.",

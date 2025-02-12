@@ -21,7 +21,7 @@ const SingleProject = ({name,year,align,image,tech,link,onSelect}) => {
         <h2 className= {`text-xl  text-white font-semibold font-special sm:text-center ${ align === 'left' ? 'md:text-left' : 'md:text-left'}  `}>{year}</h2>
         
           <a href={link} target="_blank" rel="noopener noreferrer"
-          className="text-lg flex gap-2 items-center text-cyan hover:!text-white transition-all duration-500 cursor-pointer"
+          className="text-lg flex gap-2 items-center text-cyan hover:!text-white transition-all duration-500 justify-center cursor-pointer"
           onClick={(e) => e.stopPropagation()} // Prevents triggering onSelect when clicking the link
         >          View <BiSolidRightTopArrowCircle />
 </a>
