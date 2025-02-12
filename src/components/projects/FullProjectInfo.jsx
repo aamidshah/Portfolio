@@ -77,7 +77,7 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
          <div className=" flex-1  max-h-[500px] max-w-[900px] pt-12 " >
       {/* Images */}
       <div className='overflow-y-auto custom-scrollbar h-[500px] pr-4' onScroll={handleScroll}>
-      {image.map((img, index) => (
+      {/* {image.map((img, index) => (
         <motion.img
           key={index}
           src={img}
@@ -88,7 +88,26 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
           whileInView="show"
           viewport={{ once: false, amount: 0.7 }}
         />
-      ))}
+
+      ))} */}
+       {image.length > 0 ? (
+    image.map((img, index) => (
+      <motion.img
+        key={index}
+        src={img}
+        alt={`Project Image ${index + 1}`}
+        className="w-full h-64 object-cover mb-4 lg:h-full rounded-xl shadow-md transition-opacity duration-300"
+        variants={FadeIn("left", 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.7 }}
+      />
+    ))
+  ) : (
+    <div className="flex items-center justify-center h-64 text-gray-500 text-lg font-semibold">
+      Oops!! No images available 😢
+    </div>
+  )}
 </div>
       {/* Dots Indicator */}
       <div className="absolute right-2 top-1/2 transform -translate-y-1/2 flex flex-col gap-2">

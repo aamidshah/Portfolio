@@ -6,8 +6,8 @@ export const projects = [
     align:'left',
     image:[
       '/images/Portfolio.png',
-    '/images/Portfolio.png',
-    '/images/Portfolio.png'
+    '/images/portfolio2.png',
+    '/images/portfolio3.png'
   ],
     link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/",
     gitLink:"https://github.com/aamidshah/Portfolio",
@@ -27,9 +27,7 @@ export const projects = [
     align:'right',
    
     image:[
-      '/images/website-img-1.jpg',
-    '/images/Portfolio.png',
-    '/images/Portfolio.png'
+      
   ],
     link:"https://github.com/aamidshah/Advance-Filtering",
     gitLink:"https://github.com/aamidshah/Advance-Filtering",
@@ -51,8 +49,8 @@ export const projects = [
     align:'left',
     image:[
       '/images/Netflix.png',
-    '/images/Portfolio.png',
-    '/images/Portfolio.png'
+    '/images/Netflix2.png',
+    '/images/Netflix3.png'
   ],
     link:"https://mern-netflix-clone-lp9d.onrender.com/",
 
@@ -74,9 +72,9 @@ export const projects = [
     year:"june-2023",
     align:'right',
     image:[
-      '/images/website-img-3.jpg',
-    '/images/Portfolio.png',
-    '/images/Portfolio.png'
+      '/images/Event1.png',
+    '/images/Event2.png',
+    '/images/Event3.png'
   ],
     link:"https://mern-stack-event-handler.vercel.app/",
     gitLink:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
@@ -97,8 +95,8 @@ export const projects = [
     align:'left',
     image:[
       '/images/StudyBuddy.png',
-    '/images/Portfolio.png',
-    '/images/Portfolio.png'
+      '/images/StudyBuddy2.png',
+      '/images/StudyBuddy3.png',
   ],
     link:"https://github.com/aamidshah/StudyBuddy-webapp",
     gitLink:"https://github.com/aamidshah/StudyBuddy-webapp",

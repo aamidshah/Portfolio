@@ -30,7 +30,18 @@ const SingleProject = ({name,year,align,image,tech,link,onSelect}) => {
 
       <div className='max-h-[220px] max-w-[400px] rounded-xl overflow-hidden hover:scale-110 transform transition-all duration-500 relative border border-white '>
         <div className='w-full h-full bg-cyan opacity-[50%] absolute top-0 left-0 hover:opacity-0 transition-all duration-500 md:block hidden  '></div>
+
+
+        {
+          image? ( 
         <img src={image} alt="project-Image" className='w-full h-full  ' />
+       ):( <div className="flex items-center justify-center h-64 text-gray-500 text-lg font-semibold">
+        Oops!! No images available 😢
+      </div>
+    )
+    }
+
+
       </div>
     </motion.div>
   )
