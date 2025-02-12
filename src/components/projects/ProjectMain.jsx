@@ -50,7 +50,10 @@ const ProjectMain = () => {
         ) : (
           <FullProjectInfo
             {...selectedProject}
-            onClose={() => setSelectedProject(null)}
+
+            onClose={() => {
+              console.log(selectedProject);
+              setSelectedProject(null)}}
           />
         ))}
     </div>

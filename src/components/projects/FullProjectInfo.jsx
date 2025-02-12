@@ -5,7 +5,7 @@ import { FaExternalLinkAlt, FaGithub ,FaCheckCircle} from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
 
-const FullProjectInfo = ({ name, year, image, link, gitLink,features, tech, description, onClose }) => {
+const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologies, description, onClose }) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, tech, desc
         </ul>
         <div className="flex flex-col gap-2 mt-6">
           <p className="text-lg text-gray-300"><strong>Year:</strong> {year}</p>
-          <p className="text-lg text-gray-300"><strong>Tech:</strong> {tech}</p>
+          <p className="text-lg text-gray-300"><strong>Tech:</strong> {technologies}</p>
         </div>
       </motion.div>
 
