@@ -13,6 +13,8 @@ import FooterMain from './components/footer/FooterMain'
 
 const hello  = () => {
   return (
+   
+
     <main className='font-sans overflow-hidden'>
       <NavBarMain />
       <HeroMain />  
@@ -26,6 +28,7 @@ const hello  = () => {
       <FooterMain />
       {/* <HelperSection /> */}
     </main>
+   
   )
 }
 

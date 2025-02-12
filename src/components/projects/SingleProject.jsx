@@ -5,7 +5,7 @@ import { FadeIn } from '../../framerMotion/Variants'
 import { Link } from 'react-scroll';
 
 
-const SingleProject = ({name,year,align,image,tech,link}) => {
+const SingleProject = ({name,year,align,image,tech,link,onSelect}) => {
   return (
     <motion.div
     variants={FadeIn('up', 0.2) }
@@ -14,15 +14,17 @@ const SingleProject = ({name,year,align,image,tech,link}) => {
     viewport={{once: false, amount: 0.7}}
 
     
-    className={`flex w-full sm:flex-col-reverse items-center gap-8 ${align === 'left' ? 'md:flex-row': ' md:flex-row-reverse'} justify-end lg:justify-evenly`}>
+    className={`flex w-full sm:flex-col-reverse items-center gap-8 ${align === 'left' ? 'md:flex-row': ' md:flex-row-reverse'} justify-end lg:justify-evenly`} onClick={()=>{ 
+      onSelect() }}>
       <div>
         <h2 className='md:text-3xl text-2xl text-orange '>{name}</h2>
         <h2 className= {`text-xl  text-white font-semibold font-special sm:text-center ${ align === 'left' ? 'md:text-left' : 'md:text-left'}  `}>{year}</h2>
-        <h2 className= {`text-[16px] font-thin text-white font-special sm:text-center ${ align === 'left' ? 'md:text-left' : 'md:text-left'}  `}>{tech}</h2>
-
-
-        <a href={link} className={`text-lg flex gap-2 items-center text-cyan hover:!text-[var(--white)] transition-all duration-500  cursor-pointer sm:justify-self-center ${align === 'left' ? 'md:justify-self-start' : 'md:justify-self-start'} `}>view <BiSolidRightTopArrowCircle />
-        </a>
+        
+          <a href={link} target="_blank" rel="noopener noreferrer"
+          className="text-lg flex gap-2 items-center text-cyan hover:!text-white transition-all duration-500 cursor-pointer"
+          onClick={(e) => e.stopPropagation()} // Prevents triggering onSelect when clicking the link
+        >          View <BiSolidRightTopArrowCircle />
+</a>
 
       </div>
 

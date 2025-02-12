@@ -156,3 +156,7 @@ body {
   background: linear-gradient(to right, var(--orange), var(--cyan));
 }
 
+
+.custom-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide the default scrollbar */
+}
