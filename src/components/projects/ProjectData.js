@@ -95,8 +95,8 @@ export const projects = [
     align:'left',
     image:[
       '/images/StudyBuddy.png',
-      '/images/StudyBuddy2.png',
-      '/images/StudyBuddy3.png',
+      '/images/studyBuddy2.png',
+      '/images/studyBuddy3.png',
   ],
     link:"https://github.com/aamidshah/StudyBuddy-webapp",
     gitLink:"https://github.com/aamidshah/StudyBuddy-webapp",

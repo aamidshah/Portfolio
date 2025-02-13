@@ -14,7 +14,7 @@ const SingleProject = ({name,year,align,image,tech,link,onSelect}) => {
     viewport={{once: false, amount: 0.7}}
 
     
-    className={`flex w-full sm:flex-col-reverse items-center gap-8 ${align === 'left' ? 'md:flex-row': ' md:flex-row-reverse'} justify-end lg:justify-evenly`} onClick={()=>{ 
+    className={`flex w-full flex-col-reverse items-center gap-8 ${align === 'left' ? 'md:flex-row': ' md:flex-row-reverse'} justify-end lg:justify-evenly`} onClick={()=>{ 
       onSelect() }}>
       <div>
         <h2 className='md:text-3xl text-2xl text-orange '>{name}</h2>

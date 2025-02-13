@@ -12,10 +12,10 @@ const links = [
     link: "Skills",
     section: "skills",
   },
-  {
-    link: "Experience",
-    section: "experience",
-  },
+  // {
+  //   link: "Experience",
+  //   section: "experience",
+  // },
   {
     link: "Projects",
     section: "projects",
