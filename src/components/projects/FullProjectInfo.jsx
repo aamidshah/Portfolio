@@ -4,9 +4,13 @@ import React, { useEffect ,useState} from 'react';
 import { FaExternalLinkAlt, FaGithub ,FaCheckCircle} from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
+import ReactPlayer from 'react-player';  // Import ReactPlayer
+import ReviewForm from '../projects/ReviewForm';
 
-const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologies, description, onClose }) => {
+const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologies,video, description, onClose }) => {
+
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const generateProjectSlug = (name) => name.toLowerCase().replace(/\s+/g, '-');
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -33,8 +37,8 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
   className="bg-gray-900 text-white w-full h-full max-w-6xl rounded-lg shadow-lg overflow-hidden relative flex flex-col max-h-screen"
 >
   {/* Scrollable Content */}
-  <div className="overflow-y-auto flex-1 p-8">
-    {/* Close Button */}
+  <div className="overflow-y-auto flex-1 p-8 custom-scrollbar">
+  {/* Close Button */}
     <button
       className="absolute top- right-4 !text-gray-200 hover:!text-white text-2xl"
       onClick={onClose}
@@ -86,7 +90,7 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
       </div>
 
       {/* Right Section: Image Gallery */}
-    <div className='mt-8'>
+    {/* <div className='mt-8'> */}
          <div className=" flex-1  max-h-[400px] max-w-[400px]  border border-grey-600  rounded-2xl overflow-hidden relative " >
       {/* Images */}
       {/* <div className='md:block  overflow-y-auto custom-scrollbar h-[500px]   hidden' onScroll={handleScroll}>
@@ -147,9 +151,11 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
         
       </div>
     </div>
+    {/* </div> */}
     </div>
-    </div>
-  </div> 
+    <ReviewForm projectId={generateProjectSlug(name)} />
+    </div> 
+ 
   
 
   {/* Bottom Section: Links (Sticky at the bottom) */}
@@ -182,4 +188,7 @@ const FullProjectInfo = ({ name, year, image, link, gitLink,features, technologi
 };
 
 export default FullProjectInfo;
+
+
+
 

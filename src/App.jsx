@@ -1,3 +1,4 @@
+
 import React from 'react'
 import NavBarMain from './components/navbar/NavBarMain'
 import HeroMain from './components/heroSection/HeroMain'
@@ -13,8 +14,6 @@ import FooterMain from './components/footer/FooterMain'
 
 const hello  = () => {
   return (
-   
-
     <main className='font-sans overflow-hidden'>
       <NavBarMain />
       <HeroMain />  
@@ -28,7 +27,6 @@ const hello  = () => {
       <FooterMain />
       {/* <HelperSection /> */}
     </main>
-   
   )
 }
 

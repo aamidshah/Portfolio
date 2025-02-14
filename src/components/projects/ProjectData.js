@@ -9,6 +9,7 @@ export const projects = [
     '/images/portfolio2.png',
     '/images/portfolio3.png'
   ],
+  video: "/images/portfolio.gif",
     link:"https://portfolio-l451vry4p-aamids-projects.vercel.app/",
     gitLink:"https://github.com/aamidshah/Portfolio",
     technologies: " React|TailwindCSS|Framer Motion|JS ",
@@ -29,6 +30,8 @@ export const projects = [
     image:[
       
   ],
+  video: "/images/portfolio.gif",
+
     link:"https://github.com/aamidshah/Advance-Filtering",
     gitLink:"https://github.com/aamidshah/Advance-Filtering",
     
@@ -52,6 +55,8 @@ export const projects = [
     '/images/Netflix2.png',
     '/images/Netflix3.png'
   ],
+  video: "/images/portfolio.gif",
+
     link:"https://mern-netflix-clone-lp9d.onrender.com/",
 
     gitLink:"https://github.com/aamidshah/mern-netflix-clone",
@@ -76,6 +81,8 @@ export const projects = [
     '/images/Event2.png',
     '/images/Event3.png'
   ],
+  video: "/images/portfolio.gif",
+
     link:"https://mern-stack-event-handler.vercel.app/",
     gitLink:"https://github.com/aamidshah/MERN_STACK_EVENT_HANDLER",
     technologies: " React|Redux |TailwindCSS | Node.js | Express.js | MongoDB ",
@@ -98,7 +105,9 @@ export const projects = [
       '/images/studyBuddy2.png',
       '/images/studyBuddy3.png',
   ],
-    link:"https://github.com/aamidshah/StudyBuddy-webapp",
+  video: "/images/portfolio.gif",
+
+    link:"https://studybud-orpin.vercel.app/",
     gitLink:"https://github.com/aamidshah/StudyBuddy-webapp",
 
     technologies: "Html| CSS| Django| SQLite ",

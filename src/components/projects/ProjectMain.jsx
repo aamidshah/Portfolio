@@ -7,6 +7,8 @@ import FullProjectInfo from "./FullProjectInfo";
 import { useState } from "react";
 import ProjectSkelton from "./ProjectSkelton"; //
 import { projects } from "./ProjectData";
+// import {ReviewForm } from "./ReviewForm";
+import ReviewForm from '../projects/ReviewForm';
 
 const ProjectMain = () => {
   const [selectedProject, setSelectedProject] = useState(null);
@@ -56,6 +58,7 @@ const ProjectMain = () => {
               setSelectedProject(null)}}
           />
         ))}
+        
     </div>
   );
 };
