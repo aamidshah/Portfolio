@@ -5,9 +5,9 @@ import HeroGradient from './HeroGradient'
 
 const HeroMain = () => {
   return (
-    <div className='pt-40 pb-16'>
+    <div id='home' className='pt-40 pb-16 md:pr-12'>
 
-      {/* <div className=' flex md:flex-row flex-col mx-auto justify-between items-center relative px-4 '> */}
+      
       <div className="flex md:flex-row flex-col mx-auto justify-between items-center relative px-4 max-w-7xl ">
 
       <HeroText />

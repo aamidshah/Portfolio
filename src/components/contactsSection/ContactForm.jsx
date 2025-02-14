@@ -49,7 +49,7 @@ setSuccessVisible(true); // Show message
 
 
   return (
-    <div className=" flex flex-col gap-4 pt-6">
+    <div className=" flex flex-col gap-4 pt-6 md:w-[400px]">
     <p className={`text-cyan text-lg font-bold transition-opacity duration-1000 ${successVisible ? 'opacity-100' : 'opacity-0'}`}>
       {success}
     </p>

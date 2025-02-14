@@ -87,3 +87,6 @@ const AllSkiills = () => {
 }
 
 export default AllSkiills
+
+
+

@@ -11,10 +11,14 @@ import ExperienceMain from './components/experienceSection/ExperienceMain'
 import ProjectMain from './components/projects/ProjectMain'
 import ContactMain from './components/contactsSection/ContactMain'
 import FooterMain from './components/footer/FooterMain'
-
-const hello  = () => {
+import DashboardSidebar from './components/dashboard/SideBarMain'
+const App  = () => {
   return (
-    <main className='font-sans overflow-hidden'>
+    <main className='font-sans overflow-hidden '>
+       
+    
+       <div className="flex-1 lg:ml-[220px] xl:ml-[260px] md:ml-0 min-h-screen">
+
       <NavBarMain />
       <HeroMain />  
       <SubHeroSection />
@@ -26,8 +30,12 @@ const hello  = () => {
       <ContactMain />
       <FooterMain />
       {/* <HelperSection /> */}
+      </div>
     </main>
   )
 }
 
-export default hello 
+export default App 
+
+
+

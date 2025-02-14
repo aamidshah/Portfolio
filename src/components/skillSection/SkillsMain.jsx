@@ -8,8 +8,8 @@ import { FadeIn } from '../../framerMotion/Variants'
 
 const SkillsMain = () => {
   return (
-    <div id='skills'>
-      <div className='max-w-[1240px] mx-auto px-4 min-h-[350px] relative overflow-hidden ' >
+<div id='skills' className="  overflow-hidden">
+<div className='max-w-[1040px] mx-auto px-4 min-h-[350px] relative  overflow-hidden' >
 
         <motion.div 
          variants={FadeIn('down', 0.2) }
@@ -21,17 +21,17 @@ const SkillsMain = () => {
      <SkillsText />
         </motion.div>
       </div>
-      <div className='buttons-[50px] absolute left-[50%] -translate-x-[50%] lg:block hidden  '>
+      <div className='buttons-[50px] absolute left-[50%]  -translate-x-[50%] lg:block hidden ml-[120px] '>
       <AllSkiills />
       </div>
       <div className=' block lg:hidden '>
         <AllSkillsSm />
       </div>
-      {/* <div className="relative mt-12 lg:mt-[250px] hidden lg:block ">
-        <SubSkills />
-      </div> */}
+     
     </div>
   )
 }
 
 export default SkillsMain
+
+
