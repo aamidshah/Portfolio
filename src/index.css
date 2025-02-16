@@ -156,6 +156,9 @@ body {
   background: linear-gradient(to right, var(--orange), var(--cyan));
 }
 
+.bg-gradient-custom3 {
+  background: linear-gradient(to bottom right, #f5f5f5, #d1d1d1);
+}
 
 .custom-scrollbar::-webkit-scrollbar {
   display: none; /* Hide the default scrollbar */

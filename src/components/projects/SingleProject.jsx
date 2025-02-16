@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
 import { Link } from 'react-scroll';
 
-
-const SingleProject = ({name,year,align,image,tech,link,onSelect}) => {
+const SingleProject = ({name,year,align,image,tech,link,onSelect,id}) => {
   return (
     <motion.div
     variants={FadeIn('up', 0.2) }

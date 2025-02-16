@@ -1,18 +1,22 @@
-import React from "react";
+import React, {useEffect,useState} from "react";
 import ProjectsText from "./ProjectsText";
 import SingleProject from "./SingleProject";
 import { motion } from "framer-motion";
 import { FadeIn } from "../../framerMotion/Variants";
 import FullProjectInfo from "./FullProjectInfo";
-import { useState } from "react";
 import ProjectSkelton from "./ProjectSkelton"; //
-import { projects } from "./ProjectData";
-// import {ReviewForm } from "./ReviewForm";
 import ReviewForm from '../projects/ReviewForm';
+import projectsData from "/public/projectsData.json"; // ✅ Importing JSON data
 
 const ProjectMain = () => {
+  const [projects, setProjects] = useState([]); // ✅ State to store JSON data
+
   const [selectedProject, setSelectedProject] = useState(null);
   const [loading, setLoading] = useState(false);
+  
+  useEffect(() => {
+    setProjects(projectsData);
+  }, []);
 
   const handleSelectProject = (project) => {
     setLoading(true);
@@ -50,12 +54,14 @@ const ProjectMain = () => {
         (loading ? (
           <ProjectSkelton />
         ) : (
-          <FullProjectInfo
+          <FullProjectInfo 
             {...selectedProject}
-
             onClose={() => {
-              console.log(selectedProject);
-              setSelectedProject(null)}}
+
+              setSelectedProject(null)
+            
+            }}
+
           />
         ))}
         

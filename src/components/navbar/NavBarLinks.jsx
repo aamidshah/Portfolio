@@ -4,8 +4,10 @@ import { Link } from "react-scroll";
 import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants';
 import { links } from '../linksData'
+import { useGlobalState } from "../../context/GlobalStateContext";
 
-const NavBarLinks = ({ setShowSidebar }) => {
+const NavBarLinks = () => {
+  const { setShowSidebar } = useGlobalState();
 
   return (
     <ul className="flex flex-col lg:flex-row gap-6 lg:text-md sm:text-xl text-white font-bold text-center py-4 w-full bg-[var(--cyan)]/30 lg:bg-transparent backdrop-blur-lg sm:w-full rounded">
