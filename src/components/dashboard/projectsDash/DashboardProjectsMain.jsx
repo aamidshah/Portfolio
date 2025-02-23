@@ -1,12 +1,13 @@
 import React from 'react'
-import AddProjects from './AddProjects'
 import ProjectInsights from './ProjectInsights'
 import ProjectList from './ProjectList'
-import { IoArrowBack } from "react-icons/io5";
 import { useGlobalState } from '../../../context/GlobalStateContext';
 import BackButton from '../BackButton';
+// import useGlobalStateStore from "./store/useProjectStore";
+
 const DashboardProjects = () => {
   const {setShowSidebar,showSidebar} = useGlobalState()
+  // const { activeComponent, setActiveComponent,setShowSidebar,showSidebar } = useGlobalStateStore();
 
   
   return (
@@ -23,7 +24,6 @@ const DashboardProjects = () => {
     <div className='flex flex-col gap-12'>
     <ProjectInsights />
     <ProjectList />
-    <AddProjects />
     </div>
   </div>
   )

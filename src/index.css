@@ -168,3 +168,22 @@ body {
   -ms-overflow-style: none; /* Hide scrollbar for IE/Edge */
   scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar for Webkit-based browsers */
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* Hides scrollbar for Internet Explorer */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+/* Hide scrollbar but still allow scrolling */
+body {
+  overflow: auto; /* Allow scrolling */
+  -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+  scrollbar-width: none;  /* For Firefox */
+}
+
+/* Hide scrollbar in Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}

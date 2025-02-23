@@ -1,32 +1,15 @@
 
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaCheckCircle, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
-import projectsData from "/public/projectsData.json";
 import ReviewForm from "./ReviewForm";
-import { FadeIn } from '../../framerMotion/Variants'
-// 
-const FullProjectInfo = ({ id, onClose }) => {
+import { FadeIn } from '../../framerMotion/Variants';
+
+const FullProjectInfo = ({ id, name, description,year, image,features, technologyUsage, link, gitLink, onClose }) => {
+  console.log("Received project ID:", id);
+
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [project, setProject] = useState(null);
-  useEffect(() => {
-    // Get projects from localStorage
-    const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
 
-    // Combine default and stored projects
-    const allProjects = [...projectsData, ...storedProjects];
-
-    // Find the project by ID
-    const foundProject = allProjects.find((p) => p.id === id);
-    
-    setProject(foundProject);
-  }, [id]);
-
-  // Find the project based on id
-  // const project = projectsData.find((p) => p.id === id);
- 
-  
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") onClose();
@@ -35,30 +18,13 @@ const FullProjectInfo = ({ id, onClose }) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
+  const technologyUsageKeys = technologyUsage ? Object.keys(technologyUsage) : [];
   const handleScroll = (e) => {
     const scrollTop = e.target.scrollTop;
     const imageHeight = 500;
     const newIndex = Math.round(scrollTop / imageHeight);
     setSelectedIndex(newIndex);
   };
-
-  if (!project) {
-    return (
-      <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 backdrop-blur-md z-50">
-        <div className="bg-gray-900 text-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-2xl font-bold">Project Not Found</h1>
-          <button
-            className="mt-4 text-orange-400 hover:text-orange-300"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  const { name, year, technologies, image, link, gitLink, description, features } = project;
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 backdrop-blur-md z-50">
@@ -90,6 +56,8 @@ const FullProjectInfo = ({ id, onClose }) => {
               >
                 {description}
               </motion.p>
+              
+
               <motion.ul
                 variants={FadeIn("right", 0.2)}
                 initial="hidden"
@@ -97,13 +65,19 @@ const FullProjectInfo = ({ id, onClose }) => {
                 viewport={{ once: false, amount: 0.7 }}
                 className="mt-12"
               >
-                {features?.map((feature, index) => (
+  {Array.isArray(features) && features.length > 0 ? (
+                 features.map((feature, index) => (
                   <li key={index} className="text-lg text-gray-300 flex items-center">
                     <FaCheckCircle className="text-green-500 mr-2" /> {feature}
-                  </li>
-                ))}
+                  </li>)
+                  )
+                )
+
+                 :(<li>No features available</li>)}
+
+
               </motion.ul>
-              <motion.div
+              {/* <motion.div
                 variants={FadeIn("right", 0.2)}
                 initial="hidden"
                 whileInView="show"
@@ -113,18 +87,77 @@ const FullProjectInfo = ({ id, onClose }) => {
                 <p className="text-lg text-gray-300">
                   <strong>Year:</strong> {year}
                 </p>
+
                 <p className="text-lg text-gray-300">
-                  <strong>Tech:</strong> {technologies}
-                </p>
-              </motion.div>
+                <strong>Technologies:</strong>{" "} </p>
+               <ul>
+                {Object.keys(technologyUsage).length > 0 ? (
+  Object.keys(technologyUsage).map((techName, index) => (
+     <li key={index}>
+      {techName}
+      {index < Object.keys(technologyUsage).length - 1 ? ", " : ""}
+    </li>
+  ))
+) : (
+  "None"
+)}            </ul>
+              </motion.div> */}
+
+<motion.div
+  variants={FadeIn("right", 0.2)}
+  initial="hidden"
+  whileInView="show"
+  viewport={{ once: false, amount: 0.7 }}
+  className="flex flex-col gap-2 mt-6"
+>
+  <p className="text-lg text-gray-300">
+    <strong>Year:</strong> {year}
+  </p>
+
+  <p className="text-lg text-gray-300">
+    <strong>Technologies:</strong>
+  </p>
+
+  <ul className="space-y-2">
+{technologyUsageKeys.length > 0 ? (
+      Object.entries(technologyUsage).map(([techName, usage], index) => {
+        // Determine color based on usage percentage
+        let barColor =
+          usage > 75 ? "bg-yellow-400" :
+          usage > 50 ? "bg-blue-500" :
+          usage > 20 ? "bg-green-500" :
+          "bg-red-500"; // Less than 20%
+
+        return (
+          <li key={index} className="flex flex-col">
+            {/* Tech Name with Percentage */}
+            <span className="text-gray-300">
+              {techName} ({usage}%)
+            </span>
+
+            {/* Progress Bar */}
+            <div className="w-full h-3 bg-gray-700 rounded-lg overflow-hidden">
+              <div
+                className={`h-full rounded-lg transition-all duration-300 ${barColor}`}
+                style={{ width: `${usage}%` }}
+              ></div>
             </div>
+          </li>
+        );
+      })
+    ) : (
+      <li className="text-gray-400">None</li>
+    )}
+  </ul>
+</motion.div>
+
+            </div>
+
+
             <div className="flex-1 max-h-[400px] max-w-[400px] border border-grey-600 rounded-2xl overflow-hidden relative">
-              {/* <div
-                className="h-[500px] overflow-y-auto custom-scrollbar snap-y snap-mandatory md:block hidden"
-                onScroll={handleScroll}
-              >
-    {Array.isArray(image) && image.length > 0 ? (
-                  image.map((img, index) => (
+              <div className="h-[500px] overflow-y-auto custom-scrollbar snap-y snap-mandatory md:block hidden" onScroll={handleScroll}>
+                {image?.length > 0 ? (
+                  image?.map((img, index) => (
                     <motion.img
                       key={index}
                       src={img}
@@ -141,49 +174,27 @@ const FullProjectInfo = ({ id, onClose }) => {
                     Oops!! No images available 😢
                   </div>
                 )}
-              </div> */}
-               <div className="h-[500px] overflow-y-auto custom-scrollbar snap-y snap-mandatory md:block hidden"
-     onScroll={handleScroll}>
-       {image.length > 0 ? (
-    image.map((img, index) => (
-      <motion.img
-        key={index}
-        src={img}
-        alt={`Project Image ${index + 1}`}
-        className="w-full h-[500px] object-cover snap-center md:h-full rounded-xl shadow-md transition-opacity duration-300"
-        variants={FadeIn("left", 0.2)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: false, amount: 0.7 }}
-      />
-    ))
-  ) : (
-    <div className="flex items-center justify-center h-[500px] text-gray-500 text-lg font-semibold">
-      Oops!! No images available 😢
-    </div>
-  )}
-</div>
-<div className="flex overflow-x-auto md:hidden  max-h-[300px] w-[350px] custom-scrollbar  space-x-4 justify-center">
-      {image.length > 0 ? (
-        image.map((img, index) => (
-          <motion.img
-            key={index}
-            src={img}
-            alt={`Project Image ${index + 1}`}
-                      className="h-[300px] max-h-[500px] w-[400px]   object-cover rounded-xl shadow-md transition-opacity duration-300"
-
-            variants={FadeIn("left", 0.2)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, amount: 0.7 }}
-          />
-        ))
-      ) : (
-        <div className="flex items-center justify-center h-64 text-gray-500 text-lg font-semibold">
-          Oops!! No images available 😢
-        </div>
-      )}
-    </div>
+              </div>
+              <div className="flex overflow-x-auto md:hidden max-h-[300px] w-[350px] custom-scrollbar space-x-4 justify-center">
+                {image?.length > 0 ? (
+                  image?.map((img, index) => (
+                    <motion.img
+                      key={index}
+                      src={img}
+                      alt={`Project Image ${index + 1}`}
+                      className="h-[300px] max-h-[500px] w-[400px] object-cover rounded-xl shadow-md transition-opacity duration-300"
+                      variants={FadeIn("left", 0.2)}
+                      initial="hidden"
+                      whileInView="show"
+                      viewport={{ once: false, amount: 0.7 }}
+                    />
+                  ))
+                ) : (
+                  <div className="flex items-center justify-center h-64 text-gray-500 text-lg font-semibold">
+                    Oops!! No images available 😢
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <ReviewForm projectId={id} />
@@ -216,8 +227,3 @@ const FullProjectInfo = ({ id, onClose }) => {
 };
 
 export default FullProjectInfo;
-
-
-
-
-// ✖

@@ -4,9 +4,11 @@ import SingleProject from "./SingleProject";
 import { motion } from "framer-motion";
 import { FadeIn } from "../../framerMotion/Variants";
 import FullProjectInfo from "./FullProjectInfo";
+import axios from "axios"; // Import axios for API calls
+
 import ProjectSkelton from "./ProjectSkelton"; //
-import ReviewForm from '../projects/ReviewForm';
-import projectsData from "/public/projectsData.json"; // ✅ Importing JSON data
+import ReviewForm from './ReviewForm';
+// import projectsData from "/public/projectsData.json"; // ✅ Importing JSON data
 
 const ProjectMain = () => {
   const [projects, setProjects] = useState([]); // ✅ State to store JSON data
@@ -14,10 +16,27 @@ const ProjectMain = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const [loading, setLoading] = useState(false);
   
-  useEffect(() => {
-    setProjects(projectsData);
-  }, []);
 
+  useEffect(() => {
+
+    const fetchProjects = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`http://localhost:5000/api/projects`);
+        console.log("Fetched projects:", response); // Debugging line
+
+        
+        setProjects(response.data); // Set projects from database
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }finally {
+        setLoading(false); // Set loading to false after fetching
+      }
+    };
+  
+    fetchProjects();
+  }, []);
+  
   const handleSelectProject = (project) => {
     setLoading(true);
     setSelectedProject(project);
@@ -41,7 +60,11 @@ const ProjectMain = () => {
       <div className="flex flex-col gap-20 max-w-[900px] mx-auto mt-12 lg:items-center">
         {projects.map((item, index) => (
           <SingleProject
-            key={index}
+            key={item._id}
+            index={index}
+      // align={index % 2 === 0 ? "self-start" : "self-end"} // Pass the class here
+
+
             onSelect={() => handleSelectProject(item)}
             {...item}
             image={item.image[0]}
@@ -50,23 +73,21 @@ const ProjectMain = () => {
       </div>
 
       {/* Show Skeleton Loader while loading */}
-      {selectedProject &&
-        (loading ? (
+      {selectedProject &&(
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        {loading ? (
           <ProjectSkelton />
         ) : (
           <FullProjectInfo 
+            key={selectedProject._id}
+            id={selectedProject._id}
             {...selectedProject}
-            onClose={() => {
-
-              setSelectedProject(null)
-            
-            }}
-
+            onClose={() => setSelectedProject(null)}
           />
-        ))}
-        
+        )}
+      </div>
+      )}
     </div>
-  );
-};
-
+  )
+}
 export default ProjectMain;

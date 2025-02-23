@@ -1,19 +1,17 @@
-import React from "react";
-import { useGlobalState } from "../../../context/GlobalStateContext";
-import AddProjectsForm from "./AddProjectForm";
-const AddProjects = () => {
-  const { setActiveComponent } = useGlobalState(); // Assuming you're using global state to manage navigation
+const AddButton = ({ HandleClick }) => {
 
+  
   return (
-    <div className="p-6  width-[20px] bg-gray-100 rounded-lg shadow-md">
-      <button
-        onClick={() => setActiveComponent("addProjectForm")}
-        className="bg-blue-600 text-white p-2 rounded"
-      >
-        Add New Project
-      </button>
-    </div>
+    <button
+      onClick={HandleClick} // No need for an extra function wrapper
+      className="bg-gradient-to-r from-orange-500 to-green-600 text-white font-semibold py-2 px-2 rounded-lg shadow-lg hover:scale-105 transform transition duration-300 ease-in-out flex items-center space-x-2"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 3l9 9-9 9M4 12H21" />
+      </svg>
+      <span>Add Project</span>
+    </button>
   );
 };
 
-export default AddProjects;
+export default AddButton;

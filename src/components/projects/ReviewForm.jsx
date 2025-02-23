@@ -5,142 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
 
-//   const [success, setSuccess] = useState('');
-//   const [successVisible, setSuccessVisible] = useState(false);
-//   const [reviews, setReviews] = useState([]);
-//   const [name, setName] = useState('');
 
-//   // Load reviews from local storage on mount
-//   useEffect(() => {
-//     const storedReviews = JSON.parse(localStorage.getItem('projectReviews')) || [];
-//     setReviews(storedReviews);
-//   }, []);
-
-//   const handleMessageChange = (e) => {
-//     setMessage(e.target.value);
-//   };
-
-//   const handleNameChange = (e) => {
-//     setName(e.target.value);
-//   };
-
-//   const sendReview = (e) => {
-//     e.preventDefault();
-
-//     if (!message.trim() || !name.trim()) return;
-
-//     const newReview = {
-//       id: Date.now(),
-//       text: message,
-//       name,
-//     };
-
-//     // Update state and local storage
-//     const updatedReviews = [newReview, ...reviews]; // Newest reviews appear first
-//     setReviews(updatedReviews);
-//     localStorage.setItem('projectReviews', JSON.stringify(updatedReviews));
-
-//     // Clear input & show success message
-//     setMessage('');
-//     setName('');
-//     setSuccess('Review submitted successfully!');
-//     setSuccessVisible(true);
-
-//     // Hide success message after 3 seconds
-//     setTimeout(() => setSuccessVisible(false), 3000);
-//   };
-
-//   const deleteReview = (id) => {
-//     const updatedReviews = reviews.filter((review) => review.id !== id);
-//     setReviews(updatedReviews);
-//     localStorage.setItem('projectReviews', JSON.stringify(updatedReviews));
-//   };
-
-//   return (
-// <div className="relative flex flex-col md:flex-row items-start justify-between md:gap-38 px-4 max-w-7xl mx-auto">
-      
-//       {/* Left Side - Reviews Display */}
-//       <div className="w-full md:w-1/2 lg:w-1/2 mt-8">
-//         <div className="bg-dark p-6 rounded-lg shadow-lg w-full">
-//           <h3 className="text-xl font-bold text-white mb-4">User Reviews:</h3>
-//           {reviews.length > 0 ? (
-//             <motion.ul
-//              variants={FadeIn('down', 0.2) }
-//                   initial = 'hidden'
-//                   whileInView = 'show'
-//                   viewport={{once: false, amount: 0.7}}
-//             className="space-y-3 overflow-y-auto custom-scrollbar">
-//               {reviews.map((review) => (
-//                 <li key={review.id} className="border-b border-gray-500 pb-2">
-//                   <div className="flex justify-between items-center">
-//                     {/* Review Text + Delete Button */}
-//                     <div className="flex items-center gap-2">
-//                       <h1 className=" text-white">{review.text}</h1>
-//                       <button
-//                         onClick={() => deleteReview(review.id)}
-//                         className="text-red-500 hover:text-red-700 text-xl ml-4"
-//                         title="Delete Review"
-//                       >
-//                         🗑️
-//                       </button>
-//                     </div>
-//                   </div>
-//                   {/* Name Below Review */}
-//                   {review.name && <p className="text-sm text-gray-400 mt-1">By {review.name}</p>}
-//                 </li>
-//               ))}
-//             </motion.ul>
-//           ) : (
-//             <p className="text-gray-400">No reviews yet. Be the first to leave one!</p>
-//           )}
-//         </div>
-//       </div>
-
-//       {/* Right Side - Review Form */}
-//       <div className="w-full md:w-1/2 lg:w-1/2">
-//         <div className="bg-dark p-6 rounded-lg shadow-lg w-full">
-//           {/* Success Message */}
-//           {success && (
-//             <p className={`text-cyan text-lg font-bold transition-opacity duration-1000 ${successVisible ? 'opacity-100' : 'opacity-0'}`}>
-//               {success}
-//             </p>
-//           )}
-
-//           {/* Review Form */}
-//           <form onSubmit={sendReview} className="flex text-white flex-col gap-4">
-//             <input
-//               type="text"
-//               name="name"
-//               placeholder="Enter name"
-//               required
-//               value={name}
-//               className="w-full rounded-lg bg-lightBrown p-3"
-//               onChange={handleNameChange}
-//             />
-
-//             <textarea
-//               name="message"
-//               placeholder="Write your review..."
-//               value={message}
-//               onChange={handleMessageChange}
-//               rows="5"
-//               required
-//               className="rounded-lg bg-lightBrown p-3 resize-none"
-//             ></textarea>
-
-//             <button
-//               type="submit"
-//               className="w-full rounded-lg border border-cyan text-black h-12 font-bold text-xl bg-orange hover:bg-darkCyan transition-all duration-500"
-//             >
-//               Submit Review
-//             </button>
-//           </form>
-//         </div>
-//       </div>
-
-//     </div>
-//   );
-// };
 
 const ReviewForm = ({ projectId }) => {
   const [message, setMessage] = useState('');
@@ -150,42 +15,88 @@ const ReviewForm = ({ projectId }) => {
   const [name, setName] = useState('');
   const [showAll, setShowAll] = useState(false);
 
-  useEffect(() => {
-    const storedReviews = JSON.parse(localStorage.getItem(`reviews-${projectId}`)) || [];
-    setReviews(storedReviews);
-  }, [projectId]);
+ 
+  const fetchReviews = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}`);
+      if (!response.ok) throw new Error('Failed to fetch reviews');
 
-  const sendReview = (e) => {
+      const data = await response.json();
+
+      // ✅ Ensure state only updates with fresh data
+      setReviews(data);
+    } catch (error) {
+      console.error('Error fetching reviews:', error);
+    }
+  };
+  useEffect(() => {
+   
+  
+    // ✅ Clear old reviews before fetching new ones
+    setReviews([]); // This prevents duplicates from accumulating
+    fetchReviews();
+  }, [projectId]);
+  
+  const sendReview = async (e) => {
     e.preventDefault();
     if (!message.trim() || !name.trim()) return;
 
-    const newReview = { id: Date.now(), text: message, name,    date: new Date().toLocaleDateString(), // Adding formatted date
+    const newReview = {
+      reviewer: name,
+      rating: 5, // Set a default rating for now
+      comment: message
     };
-    const updatedReviews = [newReview, ...reviews];
 
-    setReviews(updatedReviews);
-    localStorage.setItem(`reviews-${projectId}`, JSON.stringify(updatedReviews));
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newReview),
+      });
 
-    setMessage('');
-    setName('');
-    setSuccess('Review submitted successfully!');
-    setSuccessVisible(true);
+      if (!response.ok) throw new Error('Failed to submit review');
+      fetchReviews(); 
+      
+      // setReviews((prevReviews) => [...prevReviews, addedReview]);
+      setMessage('');
+      setName('');
+      setSuccess('Review submitted successfully!');
+      setSuccessVisible(true);
 
-    setTimeout(() => setSuccessVisible(false), 3000);
+      setTimeout(() => setSuccessVisible(false), 3000);
+    } catch (error) {
+      console.error('Error submitting review:', error);
+    }
   };
+  useEffect(() => {
+    console.log("Updated reviews:", reviews);
+  }, [reviews]);
+  
 
-  const deleteReview = (id) => {
-    const updatedReviews = reviews.filter((review) => review.id !== id);
-    setReviews(updatedReviews);
-    localStorage.setItem(`reviews-${projectId}`, JSON.stringify(updatedReviews));
+  // Delete a review from the database
+  const deleteReview = async (reviewId) => {
+    console.log(`Deleting review:http://localhost:5000/api/reviews/${projectId}/${reviewId}`);
+
+    try {
+      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}/${reviewId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete review');
+
+      setReviews(reviews.filter((review) => review._id !== reviewId));
+    } catch (error) {
+      console.error('Error deleting review:', error);
+    }
   };
-
   return (
     <div className="relative flex flex-col md:flex-row  items-center md:gap-38  max-w-7xl mx-auto">
       {/* Reviews Display */}
       <div className="w-full md:w-1/2 lg:w-1/2 mt-8">
         <div className="bg-dark p-6 rounded-lg shadow-lg w-full">
-          <h3 className="text-xl font-bold text-white mb-4">User Reviews:</h3>
+          <h3 className="text-xl font-bold text-white mb-4">User Reviews:
+
+          </h3>
           {reviews.length > 0 ? (
             <>
             <motion.ul 
@@ -195,24 +106,29 @@ const ReviewForm = ({ projectId }) => {
               viewport={{once: false, amount: 0.7}}
             className="space-y-3 overflow-y-auto custom-scrollbar">
               {(showAll? reviews: reviews.slice(0, 3)).map((review) => (
-                <li key={review.id} className="border-b border-gray-500 pb-2">
+                
+
+                <li key={review._id} className="border-b border-gray-500 pb-2">
                   <div
                 
                   className="flex justify-between items-center">
                     <div className="flex items-center gap-30">
-                      <h1 className="text-white">{review.text}</h1>
+                      <h1 className="text-white">{review.comment}</h1>
                      
                     </div>
                     <button
-                        onClick={() => deleteReview(review.id)}
-                        className="text-red-500  hover:!text-[var(--darkCyan)] text-xl mb-[-40px] "
-                        title="Delete Review"
+                        onClick={() => {
+                          console.log("Rendering review:", review._id); // Debugging
+
+                          deleteReview(review._id)}}
+                          className="cursor-pointer bg-transparent text-red-500 hover:text-[var(--darkCyan)] text-xl mb-2"
+
                       >
                         🗑️
                       </button>
                   </div>
                   <div className='flex justify-between i'> 
-                  {review.name && <p className="text-sm text-gray-400 gap-23 flex flex-row ">By {review.name} <p>{review.date}</p></p>}
+                  {review.reviewer && <p className="text-sm text-gray-400 gap-23 flex flex-row ">By {review.reviewer} <p>{new Date(review.date).toLocaleDateString()}</p></p>}
                   </div>
                 </li>
               ))}
