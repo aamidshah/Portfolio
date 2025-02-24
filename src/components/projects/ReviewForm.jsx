@@ -49,7 +49,7 @@ const ReviewForm = ({ projectId }) => {
     };
 
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}`, {
+      const response = await fetch(`${BASE_URL}/reviews/${projectId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReview),
@@ -79,7 +79,7 @@ const ReviewForm = ({ projectId }) => {
     console.log(`Deleting review:http://localhost:5000/api/reviews/${projectId}/${reviewId}`);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}/${reviewId}`, {
+      const response = await fetch(`${BASE_URL}/reviews/${projectId}/${reviewId}`, {
         method: 'DELETE',
       });
 

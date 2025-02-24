@@ -57,7 +57,7 @@ const ProjectList = () => {
     setLoading(true);
 
     try {
-      const response = await axios.get(`http://localhost:5000/api/projects`);
+      const response = await axios.get(`${BASE_URL}/projects`);
 
       setProjects(response.data); // Update the projects state with fresh data
 
@@ -101,7 +101,7 @@ const ProjectList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/projects/${id}`); // Delete from backend
+      await axios.delete(`${BASE_URL}/projects/${id}`); // Delete from backend
 
       setProjects((prevProjects) =>
         prevProjects.filter((project) => project._id !== id)
