@@ -17,6 +17,7 @@ import AddProjects from "./AddProjects";
 import { useGlobalState } from "../../../context/GlobalStateContext";
 
 import AddButton from "./AddProjects";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const ProjectList = () => {
   const { setActiveComponent } = useGlobalState(); // Assuming you're using global state to manage navigation
@@ -36,7 +37,7 @@ const ProjectList = () => {
       setLoading(true); // Set loading to true while fetching
 
       try {
-        const response = await axios.get("http://localhost:5000/api/projects"); // Fetch from backend
+        const response = await axios.get(`${BASE_URL}/projects`); // Fetch from backend
 
         setProjects(response.data); // Set projects from database
         console.log(response.data);

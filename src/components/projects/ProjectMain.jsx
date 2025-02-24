@@ -9,6 +9,7 @@ import axios from "axios"; // Import axios for API calls
 import ProjectSkelton from "./ProjectSkelton"; //
 import ReviewForm from './ReviewForm';
 // import projectsData from "/public/projectsData.json"; // ✅ Importing JSON data
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const ProjectMain = () => {
   const [projects, setProjects] = useState([]); // ✅ State to store JSON data
@@ -22,7 +23,9 @@ const ProjectMain = () => {
     const fetchProjects = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/api/projects`);
+        console.log("API Base URL:", import.meta.env.VITE_API_URL);
+
+        const response = await axios.get(`${BASE_URL}/projects`);
         console.log("Fetched projects:", response); // Debugging line
 
         

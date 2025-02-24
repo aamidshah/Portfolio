@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // toast.configure();
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const useProjectForm = (
   setActiveComponent,
@@ -59,7 +60,7 @@ const useProjectForm = (
     if (projectId) {
       axios
 
-        .get(`http://localhost:5000/api/projects/${projectId}`)
+        .get(`${BASE_URL}/projects/${projectId}`)
 
         .then((response) => {
           const fetchedProject = response.data;
@@ -356,7 +357,7 @@ const handleImageChange = (e) => {
         // For adding a new project
 
         const response = await axios.post(
-          `http://localhost:5000/api/projects`,
+          `${BASE_URL}/projects`,
           newProject,
          
         )
@@ -414,7 +415,7 @@ const handleImageChange = (e) => {
         setActiveComponent("projects");
       } else if (projectId) {
         const response = await axios.put(
-          `http://localhost:5000/api/projects/${projectId}`,
+          `${BASE_URL}/projects/${projectId}`,
 
           newProject
           );

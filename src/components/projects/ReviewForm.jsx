@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { FadeIn } from '../../framerMotion/Variants'
 
 
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const ReviewForm = ({ projectId }) => {
   const [message, setMessage] = useState('');
@@ -18,7 +19,7 @@ const ReviewForm = ({ projectId }) => {
  
   const fetchReviews = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/reviews/${projectId}`);
+      const response = await fetch(`${BASE_URL}/reviews/${projectId}`);
       if (!response.ok) throw new Error('Failed to fetch reviews');
 
       const data = await response.json();
