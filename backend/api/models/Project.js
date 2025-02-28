@@ -21,9 +21,8 @@ const ProjectSchema = new mongoose.Schema({
     startDate: { type: Date, required: true },
     endDate: { type: Date },
     estimatedTime: { type: String },
-    status: { type: String, enum: ["In Progress", "Completed", "Pending"], default: "In Progress" },
+    status: { type: String, enum: ["In Progress", "Completed", "Pending"] },
     contributors: { type: [String], default: [] },
-    // technologyUsage: { type: Map, of: String, default: {} },
     technologyUsage: { type: Object, default: {} },
 
     // Reviews & Ratings

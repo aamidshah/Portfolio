@@ -34,7 +34,7 @@ const SingleProject = ({name,index,year,image,tech,link,onSelect,id}) => {
 
 
         {
-          image? ( 
+          image && image.length >0?( 
         <img src={image} alt="project-Image" className='w-full h-full  ' />
        ):( <div className="flex items-center justify-center h-64 text-gray-500 text-lg font-semibold">
         Oops!! No images available 😢

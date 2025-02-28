@@ -4,83 +4,58 @@ import { FaTrash } from "react-icons/fa"; // Importing trash icon
 
 import FullProjectInfo from "../../projects/FullProjectInfo";
 
-import axios from "axios";
 
 import ProjectSkelton from "../../projects/ProjectSkelton";
 
 import UpdateButton from "./UpdateButton";
 
 import AddProjectsForm from "./AddProjectForm";
+import StarRatings from "react-star-ratings";
+import {toast} from "react-toastify";
 
-import AddProjects from "./AddProjects";
-
-import { useGlobalState } from "../../../context/GlobalStateContext";
 
 import AddButton from "./AddProjects";
 const BASE_URL = import.meta.env.VITE_API_URL;
-
+import useGlobalStateStore from "../../../store/useProjectStore";
+import useAuthStore from "../../../store/authStore";
 const ProjectList = () => {
-  const { setActiveComponent } = useGlobalState(); // Assuming you're using global state to manage navigation
+  const {
+    setActiveComponent,
+    projects,
+    fetchProjects,
+    selectedProjectId,
+    setSelectedProjectId,
+    loading,
+    setLoading,
+    isUpdating,
+    setIsUpdating,
+    selectedProject,
+    setSelectedProject,
+    handleDelete,
+    handleUpdateSuccess,
+    averageRating,
+  } = useGlobalStateStore();
+  const isUserAuthenticated = useAuthStore((state) => state.isAuthenticated); // ✅ Correct way to access Zustand state
 
-  const [projects, setProjects] = useState([]);
-
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
-
-  const [loading, setLoading] = useState(false);
-
-  const [isUpdating, setIsUpdating] = useState(false); // Track if in update mode
-
-  const [selectedProject, setSelectedProject] = useState(null); // Track selected project
-
+  
   useEffect(() => {
-    const fetchProjects = async () => {
-      setLoading(true); // Set loading to true while fetching
-
-      try {
-        const response = await axios.get(`${BASE_URL}/projects`); // Fetch from backend
-
-        setProjects(response.data); // Set projects from database
-        console.log(response.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      } finally {
-        setLoading(false); // Set loading to false after fetching
-      }
-    };
-
     fetchProjects();
-  }, []);
+    console.log("Projects in state:", projects);
+  }, [fetchProjects
+  ]);
 
-  const handleUpdateSuccess = async () => {
-    // New function to refetch and update
 
-    setLoading(true);
 
-    try {
-      const response = await axios.get(`${BASE_URL}/projects`);
-
-      setProjects(response.data); // Update the projects state with fresh data
-
-      setIsUpdating(false);
-
-      setSelectedProjectId(null);
-
-      setSelectedProject(null);
-
-      setActiveComponent("projects");
-    } catch (error) {
-      console.error("Error refetching projects:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleEnableUpdateMode = () => {
+    if (!isUserAuthenticated) {
+      toast.error("You need to log in to update a project!");
+      setActiveComponent("authScreen");
+      return;
+    }
     setIsUpdating(true);
-
-    setSelectedProjectId(null); // Reset any previous selection
-
-    setSelectedProject(null); // Reset any previously selected project
+    setSelectedProjectId(null);
+    setSelectedProject(null);
   };
 
   const handleProjectClick = (project) => {
@@ -96,26 +71,15 @@ const ProjectList = () => {
   };
 
   const handleAddProject = () => {
-    setActiveComponent("addProjectForm");
-  };
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`${BASE_URL}/projects/${id}`); // Delete from backend
-
-      setProjects((prevProjects) =>
-        prevProjects.filter((project) => project._id !== id)
-      );
-
-      // If the selected project is deleted, close FullProjectInfo
-
-      if (selectedProjectId === id) {
-        setSelectedProjectId(null);
-      }
-    } catch (error) {
-      console.error("Error deleting project:", error);
+    if (!isUserAuthenticated) {
+      toast.error("You need to log in to add a project!");
+      setActiveComponent("authScreen");
+      return;
     }
+    setActiveComponent("addProjectForm");
+    setIsUpdating(false);
   };
+
 
   return (
     <div className="bg-gray-100 rounded-xl dark:bg-gray-900 min-h-screen py-2 px-5">
@@ -150,7 +114,7 @@ const ProjectList = () => {
                 setLoading(false); // Simulate loading delay (remove if unnecessary)
               }, 1000);
             }}
-            className={`relative bg-white dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
+            className={`relative !bg-white dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
 
 ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in update mode
           >
@@ -194,13 +158,24 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
   ) : (
     "None"
   )}         </p>
+{project.averageRating  ? (
+  <StarRatings
+    rating={project.averageRating} // Get rating specific to project
+    starRatedColor="#fff002"
+    numberOfStars={5}
+    starDimension="16px"
+    starSpacing="2px"
+  />
+) : (
+  <p>No ratings yet</p>
+)}
 
-              <div className="flex md:justify-between justify-evenly xl:justify-evenly lg:flex-row md:gap-3 md:flex-col flex-row items-center mt-5">
+              <div className="flex md:justify-between justify-evenly xl:justify-evenly lg:flex-row md:gap-3 md:mr-14 flex-row items-center mt-5">
                 <a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200"
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm xl:px-4 xl:py-2 lg:py-[0.2rem] transition-all duration-200"
                 >
                   Live Demo
                 </a>
@@ -209,7 +184,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
                   href={project.gitLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg text-sm transition-all duration-200"
+                  className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg text-sm lg:px-2 lg:py-[0.2rem] xl:px-4 xl:py-2 transition-all duration-200"
                 >
                   GitHub Repo
                 </a>
@@ -222,9 +197,10 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
               className="absolute bottom-3 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
               onClick={(e) => {
                 e.stopPropagation();
-
-                handleDelete(project._id);
+                  handleDelete(project._id);
+              
               }}
+              
             >
               <FaTrash />
             </button>

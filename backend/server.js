@@ -8,6 +8,7 @@ const serverless = require("serverless-http");
 const cors = require("cors");
 const projectRoutes = require("./api/routes/projectRoutes");
 const reviewRoutes = require("./api/routes/reviews");
+const authRoutes = require("./api/routes/authRoutes");
 
 dotenv.config();
 const app = express();
@@ -19,7 +20,7 @@ app.use(
       "http://localhost:5173", // ✅ Allow local development
       "https://portfoliodash-1kh0l0asa-aamids-projects.vercel.app", // ✅ Allow deployed frontend
     ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
@@ -30,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });

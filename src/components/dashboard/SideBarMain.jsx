@@ -11,10 +11,11 @@ import Statisticts from "./statisticts/Statisticts";
 import SkillsMain from "./skills/SkillsMain";
 import Contribution from "./contribution/Contribution";
 import { useGlobalState } from "../../context/GlobalStateContext";
-
+import useGlobalStateStore from "../../store/useProjectStore";
 const DashboardSidebar = () => {
-  const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useGlobalState();
+  // const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useGlobalState();
 
+const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useGlobalStateStore();
 
   const handleBackToHome = () => {
     setActiveComponent(null); // Set home as active

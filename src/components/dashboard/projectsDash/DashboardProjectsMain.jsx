@@ -3,11 +3,11 @@ import ProjectInsights from './ProjectInsights'
 import ProjectList from './ProjectList'
 import { useGlobalState } from '../../../context/GlobalStateContext';
 import BackButton from '../BackButton';
-// import useGlobalStateStore from "./store/useProjectStore";
+import useGlobalStateStore from '../../../store/useProjectStore';
 
 const DashboardProjects = () => {
-  const {setShowSidebar,showSidebar} = useGlobalState()
-  // const { activeComponent, setActiveComponent,setShowSidebar,showSidebar } = useGlobalStateStore();
+  // const {setShowSidebar,showSidebar} = useGlobalState()
+  const { setShowSidebar,showSidebar } = useGlobalStateStore();
 
   
   return (

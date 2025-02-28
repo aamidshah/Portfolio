@@ -1,8 +1,12 @@
 
 
 
+
 import React from "react";
-import { useGlobalState } from "./context/GlobalStateContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+
+import useGlobalStateStore from "./store/useProjectStore";
 import NavBarMain from "./components/navbar/NavBarMain";
 import HeroMain from "./components/heroSection/HeroMain";
 import AboutMeMain from "./components/aboutMe/AboutMeMain";
@@ -14,25 +18,13 @@ import DashboardSidebar from "./components/dashboard/SideBarMain";
 import DashboardProjects from "./components/dashboard/projectsDash/DashboardProjectsMain";
 import Contribution from "./components/dashboard/contribution/Contribution";
 import ProjectInsights from "./components/dashboard/projectsDash/ProjectInsights";
-import SubSkills from './components/skillSection/SubSkills'
-import Statistics from './components/dashboard/statisticts/Statisticts'
+import SubSkills from "./components/skillSection/SubSkills";
+import Statistics from "./components/dashboard/statisticts/Statisticts";
 import AddProjectsForm from "./components/dashboard/projectsDash/AddProjectForm";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import toast styles
-// import useGlobalStateStore from "./store/useProjectStore";
-// import projects from "./projects.json";
-
-
-
-
-
-
-
+import AuthForm from "./components/login/AuthForm";
 const DashboardContent = () => {
-  // const { activeComponent } = useGlobalStateStore();
-  const    { activeComponent } = useGlobalState();
+  const { activeComponent } = useGlobalStateStore(); // Using Zustand store
 
-  
   return (
     <div className="lg:ml-[220px] xl:ml-[220px] p-4 lg:p-8">
       {activeComponent === "projects" && <DashboardProjects />}
@@ -41,17 +33,17 @@ const DashboardContent = () => {
       {activeComponent === "skills" && <SkillsMain />}
       {activeComponent === "insights" && <ProjectInsights />}
       {activeComponent === "addProjectForm" && <AddProjectsForm />}
+      {activeComponent === "authScreen" && <AuthForm />}
     </div>
   );
 };
 
 const App = () => {
-  // const { activeComponent } = useGlobalStateStore(); // Use the Zustand store
-  const    { activeComponent } = useGlobalState();
+  const { activeComponent } = useGlobalStateStore(); // Use Zustand store
 
   return (
-<main className="font-sans overflow-x-hidden overflow-y-auto min-h-screen w-full">
-<ToastContainer autoClose={3000} />
+ <main className="font-sans overflow-x-hidden overflow-y-auto min-h-screen w-full">
+      <ToastContainer autoClose={3000} />
       <DashboardSidebar />
       <NavBarMain />
 
@@ -62,7 +54,7 @@ const App = () => {
           <HeroMain />
           <AboutMeMain />
           <SkillsMain />
-            <SubSkills/>
+          <SubSkills />
           <ProjectMain />
           <ContactMain />
           <FooterMain />
@@ -73,4 +65,3 @@ const App = () => {
 };
 
 export default App;
-

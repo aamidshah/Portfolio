@@ -7,13 +7,14 @@ const getReviews = async (req, res) => {
         const project = await Project.findById(req.params.projectId);
         if (!project) return res.status(404).json({ message: "Project not found" });
 
-        res.json(project.reviews);
+        res.json({ reviews: project.reviews, averageRating: project.averageRating });
     } catch (error) {
         res.status(500).json({ message: "Server error", error });
     }
-};
+}
 
-// Add a new review
+
+
 const addReview = async (req, res) => {
   console.log(req.body);
   try {
@@ -22,6 +23,10 @@ const addReview = async (req, res) => {
       if (!reviewer || !rating || !comment) {
           return res.status(400).json({ message: "All fields are required" });
       }
+      if (isNaN(rating) || rating < 1 || rating > 5) {
+        return res.status(400).json({ message: "Invalid rating. It must be a number between 1 and 5." });
+    }
+    
 
       const project = await Project.findById(req.params.projectId);
       if (!project) return res.status(404).json({ message: "Project not found" });
@@ -47,8 +52,10 @@ const addReview = async (req, res) => {
       project.reviews.unshift(newReview);
 
       // Update average rating
-      project.averageRating =
-          project.reviews.reduce((sum, r) => sum + r.rating, 0) / project.reviews.length;
+      project.averageRating = parseFloat(
+        (project.reviews.reduce((sum, r) => sum + r.rating, 0) / project.reviews.length).toFixed(1)
+    );
+    
 
       await project.save();
       res.status(201).json({ message: "Review added successfully", reviews: project.reviews });
@@ -83,61 +90,62 @@ const getReviewById = async (req, res) => {
 
 
 
+
 // const deleteReview = async (req, res) => {
-//   console.log("Received delete request for:", req.params);
-//   console.log("reviewId Type:", typeof reviewId);
-
-
 //   try {
-//     const { projectId, reviewId } = req.params;
+//       const { projectId, reviewId } = req.params;
 
-//     if (!mongoose.Types.ObjectId.isValid(reviewId)) {
-//       return res.status(400).json({ message: "Invalid review ID format" });
-//     }
+//       console.log("Received delete request for:", projectId, reviewId); // Fix logging
 
-//     // Convert reviewId to ObjectId before using $pull
-//     const updatedProject = await Project.findByIdAndUpdate(
-//       projectId,
-//       { $pull: { reviews: { _id: new mongoose.Types.ObjectId(reviewId) } } }, // Fix here
-//       { new: true }
-//     );
+//       if (!mongoose.Types.ObjectId.isValid(reviewId)) {
+//           return res.status(400).json({ message: "Invalid review ID format" });
+//       }
 
-//     if (!updatedProject) {
-//       return res.status(404).json({ message: "Project not found" });
-//     }
+//       // Convert reviewId to ObjectId before using $pull
+//       const updatedProject = await Project.findByIdAndUpdate(
+//           projectId,
+//           { $pull: { reviews: { _id: new mongoose.Types.ObjectId(reviewId) } } },
+//           { new: true }
+//       );
 
-//     res.status(200).json({ message: "Review deleted successfully", project: updatedProject });
+//       if (!updatedProject) {
+//           return res.status(404).json({ message: "Project not found" });
+//       }
+
+//       res.status(200).json({ message: "Review deleted successfully", project: updatedProject });
 //   } catch (error) {
-//     console.error("Error deleting review:", error);
-//     res.status(500).json({ message: "Error deleting review", error });
+//       console.error("Error deleting review:", error);
+//       res.status(500).json({ message: "Error deleting review", error });
 //   }
 // };
+
 const deleteReview = async (req, res) => {
-  try {
-      const { projectId, reviewId } = req.params;
+    try {
+        const { projectId, reviewId } = req.params;
 
-      console.log("Received delete request for:", projectId, reviewId); // Fix logging
+        if (!mongoose.Types.ObjectId.isValid(reviewId)) {
+            return res.status(400).json({ message: "Invalid review ID format" });
+        }
 
-      if (!mongoose.Types.ObjectId.isValid(reviewId)) {
-          return res.status(400).json({ message: "Invalid review ID format" });
-      }
+        // Find project and remove the review
+        const project = await Project.findById(projectId);
+        if (!project) return res.status(404).json({ message: "Project not found" });
 
-      // Convert reviewId to ObjectId before using $pull
-      const updatedProject = await Project.findByIdAndUpdate(
-          projectId,
-          { $pull: { reviews: { _id: new mongoose.Types.ObjectId(reviewId) } } },
-          { new: true }
-      );
+        project.reviews = project.reviews.filter(review => review._id.toString() !== reviewId);
 
-      if (!updatedProject) {
-          return res.status(404).json({ message: "Project not found" });
-      }
+        // Recalculate average rating
+        project.averageRating = project.reviews.length
+            ? parseFloat(
+                (project.reviews.reduce((sum, r) => sum + r.rating, 0) / project.reviews.length).toFixed(1)
+            )
+            : 0; // Set to 0 if no reviews remain
 
-      res.status(200).json({ message: "Review deleted successfully", project: updatedProject });
-  } catch (error) {
-      console.error("Error deleting review:", error);
-      res.status(500).json({ message: "Error deleting review", error });
-  }
+        await project.save();
+
+        res.status(200).json({ message: "Review deleted successfully", reviews: project.reviews, averageRating: project.averageRating });
+    } catch (error) {
+        res.status(500).json({ message: "Error deleting review", error });
+    }
 };
 
 

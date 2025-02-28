@@ -6,8 +6,9 @@ import { FadeIn } from '../../framerMotion/Variants';
 import { links } from '../linksData'
 import { useGlobalState } from "../../context/GlobalStateContext";
 
+import useGlobalStateStore from "../../store/useProjectStore";
 const NavBarLinks = () => {
-  const { setShowSidebar } = useGlobalState();
+  const { setShowSidebar } = useGlobalStateStore();
 
   return (
     <ul className="flex flex-col lg:flex-row gap-6 lg:text-md sm:text-xl text-white font-bold text-center py-4 w-full bg-[var(--cyan)]/30 lg:bg-transparent backdrop-blur-lg sm:w-full rounded">

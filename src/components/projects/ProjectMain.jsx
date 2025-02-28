@@ -5,40 +5,23 @@ import { motion } from "framer-motion";
 import { FadeIn } from "../../framerMotion/Variants";
 import FullProjectInfo from "./FullProjectInfo";
 import axios from "axios"; // Import axios for API calls
-
+import useGlobalStateStore from "../../store/useProjectStore";
 import ProjectSkelton from "./ProjectSkelton"; //
 import ReviewForm from './ReviewForm';
 // import projectsData from "/public/projectsData.json"; // ✅ Importing JSON data
 const BASE_URL = import.meta.env.VITE_API_URL;
 
 const ProjectMain = () => {
-  const [projects, setProjects] = useState([]); // ✅ State to store JSON data
 
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [loading, setLoading] = useState(false);
-  
+  const {selectedProject, setSelectedProject, loading, setLoading,fetchProjects, projects, setProjects} = useGlobalStateStore();
+  const [showAllProjects, setShowAllProjects] = useState(false);
+
 
   useEffect(() => {
-
-    const fetchProjects = async () => {
-      setLoading(true);
-      try {
-        console.log("API Base URL:", import.meta.env.VITE_API_URL);
-
-        const response = await axios.get(`${BASE_URL}/projects`);
-        console.log("Fetched projects:", response); // Debugging line
-
-        
-        setProjects(response.data); // Set projects from database
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }finally {
-        setLoading(false); // Set loading to false after fetching
-      }
-    };
   
     fetchProjects();
-  }, []);
+    // console.log("Projects in state:");
+  }, [fetchProjects]);
   
   const handleSelectProject = (project) => {
     setLoading(true);
@@ -60,21 +43,31 @@ const ProjectMain = () => {
         <ProjectsText />
       </motion.div>
 
-      <div className="flex flex-col gap-20 max-w-[900px] mx-auto mt-12 lg:items-center">
-        {projects.map((item, index) => (
+     
+
+<div className="flex flex-col gap-20 max-w-[900px] mx-auto mt-12 lg:items-center">
+        {(showAllProjects ? projects : projects.slice(0, 3)).map((item, index) => (
           <SingleProject
             key={item._id}
             index={index}
-      // align={index % 2 === 0 ? "self-start" : "self-end"} // Pass the class here
-
-
             onSelect={() => handleSelectProject(item)}
             {...item}
-            image={item.image[0]}
+            image={item.image?.length > 0 ? item.image[0] : null}
           />
         ))}
       </div>
 
+      {/* See More / See Less Button */}
+      {projects.length > 3 && (
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => setShowAllProjects(!showAllProjects)}
+            className="px-4 py-2 bg-gradient-custom3 !text-black font-semibold rounded-md  transition"
+          >
+            {showAllProjects ? "See Less" : "See More"}
+          </button>
+        </div>
+      )}
       {/* Show Skeleton Loader while loading */}
       {selectedProject &&(
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">

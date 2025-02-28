@@ -9,17 +9,18 @@ import AddFeatures from "./AddFeatures";
 import useProjectForm from "./UseProjectForm";
 
 import AddProjects from "./AddProjects";
+import useGlobalStateStore from "../../../store/useProjectStore";
 
 const AddProjectsForm = ({
   projectId,
   setIsUpdating,
-  selectedProject,
+  // selectedProject,
   onUpdateSuccess,
-  setSelectedProject,
+  // setSelectedProject,
   setSelectedProjectId,
  
 }) => {
-  const { setActiveComponent } = useGlobalState();
+  const { setActiveComponent,  selectedProject,setSelectedProject } = useGlobalStateStore();
   const [imagePreview, setImagePreview] = useState(null); // For preview
 
   const {
@@ -28,18 +29,16 @@ const AddProjectsForm = ({
     handleImageChange,
 
     handleFeatureAdd,
-
+project,setProject,
     handleFeatureRemove,
 
     handleSubmit,
     technologyUsage,
-    setProject,
     handleUsageChange,
     handleTechnologyAdd,
 
     handleCancel,
 
-    project,
   } = useProjectForm(
     setActiveComponent,
     setIsUpdating,
@@ -74,7 +73,7 @@ const AddProjectsForm = ({
     if (url.includes("drive.google.com")) {
       const match = url.match(/[-\w]{25,}/);
       if (match) {
-        url = `https://lh3.googleusercontent.com/d/${match[0]}=s500`;
+        url = `https://drive.google.com/thumbnail?id=${match[0]}&sz=w1000`;
       }
     }
   
@@ -94,7 +93,7 @@ const AddProjectsForm = ({
   const complexities = ["Easy", "Medium", "Hard"];
 
   const estimatedTimeOptions = ["1 Week", "2 Weeks", "3 Weeks", "Custom"];
-
+const status = ["In Progress","Completed","Pending"]
   
 
   return (
@@ -170,6 +169,25 @@ const AddProjectsForm = ({
             ))}
           </select>
 
+{/* status */}
+<select
+            name="status"
+            value={project.status}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+            required
+          >
+            <option value="">Project Status</option>
+
+            {status.map((sta) => (
+              <option key={sta} value={sta}>
+                {sta}
+              </option>
+            ))}
+          </select>
+
+
+{/* contributors */}
           <input
             type="text"
             name="contributors"
