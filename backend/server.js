@@ -14,27 +14,13 @@ dotenv.config();
 const app = express();
 
 
-// app.use(
-//   cors({
-//     origin: [
-//       "http://localhost:5173", // ✅ Allow local development
-//       "https://portfoliodash-1chnr50rw-aamids-projects.vercel.app", // ✅ Allow deployed frontend
-//       "https://portfoliodash-lflngdb3s-aamids-projects.vercel.app"
-//     ],
-//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"],
-
-//     credentials: true,
-//   })
-// );
-// /const cors = require("cors");
-
-
-// const cors = require("cors");
 
 app.use(
   cors({
-    origin: ["https://portfoliodash-6oz96r1gn-aamids-projects.vercel.app", "https://portfoliodash-q0zqydjrz-aamids-projects.vercel.app","http://localhost:5173"],
+    origin: ["https://portfoliodash-6oz96r1gn-aamids-projects.vercel.app", "https://portfoliodash-q0zqydjrz-aamids-projects.vercel.app","http://localhost:5173",
+     "https://portfoliodash-b6l6lf1nh-aamids-projects.vercel.app",
+     "https://portfoliodash.vercel.app",
+     "https://portfoliodash-awglweezx-aamids-projects.vercel.app"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true, // Allow cookies and auth headers

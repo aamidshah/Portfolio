@@ -22,18 +22,26 @@ exports.register = async (req, res) => {
 
   try {
     // Check for existing username and email together
-    const existingUser = await User.findOne({ username: { $regex: new RegExp(`^${username}$`, "i") } });
+    const existingUser = await User.findOne({
+      $or: [
+        { username: { $regex: new RegExp(`^${username}$`, "i") } },
+        { email: email }
+      ]
+    });
+    
 
     if (existingUser) {
-      if (existingUser.username === username) {
-        console.log("❌ Username already exists!"); // Debugging
-
+      if (existingUser.username.toLowerCase() === username.toLowerCase() && existingUser.email.toLowerCase() === email.toLowerCase()) {
+        return res.status(400).json({ message: "Username and email are already in use!" });
+      }
+      if (existingUser.username.toLowerCase() === username.toLowerCase()) {
         return res.status(400).json({ message: "Username already taken!" });
       }
-      if (existingUser.email === email) {
+      if (existingUser.email.toLowerCase() === email.toLowerCase()) {
         return res.status(400).json({ message: "Email already in use!" });
       }
     }
+    
 
     // Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);

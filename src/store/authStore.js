@@ -203,13 +203,16 @@ signup: async (username, email, password) => {
 
       console.log("🔹 Full API Response:", response);
       console.log("🔹 Response Status:", response.status);
+      const responseText = await response.text(); // Read response as text first
 
       let data;
       try {
-          data = await response.json();
+          // data = await response.json();
+          data = JSON.parse(responseText); // Try parsing JSON
+
           console.log("🔹 Parsed Data:", data);
       } catch (jsonError) {
-          console.error("❌ JSON Parse Error:", jsonError);
+          console.error("❌ JSON Parse Error:", responseText);
           return { success: false, message: "Invalid server response." };
       }
 
