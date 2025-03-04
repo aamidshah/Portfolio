@@ -33,7 +33,7 @@ const ProjectList = () => {
     setSelectedProject,
     handleDelete,
     handleUpdateSuccess,
-    averageRating,
+    // averageRating,
   } = useGlobalStateStore();
   const isUserAuthenticated = useAuthStore((state) => state.isAuthenticated); // ✅ Correct way to access Zustand state
 
@@ -158,10 +158,10 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
   ) : (
     "None"
   )}         </p>
-{project.averageRating  ? (
+{project.averageRating ? (
   <StarRatings
     rating={project.averageRating} // Get rating specific to project
-    starRatedColor="#fff002"
+    starRatedColor="#000000"
     numberOfStars={5}
     starDimension="16px"
     starSpacing="2px"
@@ -194,7 +194,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
             {/* Delete Button (Bottom Right Corner) */}
 
             <button
-              className="absolute bottom-3 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
+              className="absolute bottom-6 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
               onClick={(e) => {
                 e.stopPropagation();
                   handleDelete(project._id);

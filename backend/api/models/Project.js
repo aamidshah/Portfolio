@@ -30,6 +30,16 @@ const ProjectSchema = new mongoose.Schema({
     averageRating: { type: Number, default: 0 } // Stores overall rating for the project
 
 }, { timestamps: true });
+ProjectSchema.pre("save", function (next) {
+    if (this.reviews.length > 0) {
+        this.averageRating = parseFloat(
+            (this.reviews.reduce((sum, review) => sum + review.rating, 0) / this.reviews.length).toFixed(1)
+        );
+    } else {
+        this.averageRating = 0;
+    }
+    next();
+});
 
 // Export the Project model
 module.exports = mongoose.model("Project", ProjectSchema);

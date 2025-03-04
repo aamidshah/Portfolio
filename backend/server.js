@@ -14,24 +14,46 @@ dotenv.config();
 const app = express();
 
 
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173", // ✅ Allow local development
+//       "https://portfoliodash-1chnr50rw-aamids-projects.vercel.app", // ✅ Allow deployed frontend
+//       "https://portfoliodash-lflngdb3s-aamids-projects.vercel.app"
+//     ],
+//     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+
+//     credentials: true,
+//   })
+// );
+// /const cors = require("cors");
+
+
+// const cors = require("cors");
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // ✅ Allow local development
-      "https://portfoliodash-1kh0l0asa-aamids-projects.vercel.app", // ✅ Allow deployed frontend
-    ],
+    origin: ["https://portfoliodash-6oz96r1gn-aamids-projects.vercel.app", "https://portfoliodash-q0zqydjrz-aamids-projects.vercel.app","http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true, // Allow cookies and auth headers
   })
 );
+
+
+
+
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
+app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/projects", projectRoutes);
-app.use("/api/auth", authRoutes);
 
 app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });
@@ -50,6 +72,11 @@ const connectDB = async () => {
     console.error("❌ MongoDB Connection Error:", err);
   }
 };
+app.use((req, res, next) => {
+  console.log("Incoming Request:", req.method, req.path, "Origin:", req.headers.origin);
+  next();
+});
+
 
 connectDB();
 if (process.env.NODE_ENV !== "production") {

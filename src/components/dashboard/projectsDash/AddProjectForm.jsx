@@ -215,9 +215,7 @@ const status = ["In Progress","Completed","Pending"]
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
           />
-        </div>
-<div className="space-y-4">
-        <select
+            <select
             name="technology"
             value={project.technology}
             onChange={handleChange}
@@ -231,8 +229,6 @@ const status = ["In Progress","Completed","Pending"]
               </option>
             ))}
           </select>
-
-          {/* Proficiency Input */}
           <input
             type="number"
             name="usage"
@@ -242,9 +238,7 @@ const status = ["In Progress","Completed","Pending"]
             className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
             
           />
-
-          {/* Add Technology Usage */}
-          <button
+             <button
             type="button"
             className="mt-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:scale-105 transition transform duration-300"
             onClick={handleTechnologyAdd}
@@ -252,6 +246,15 @@ const status = ["In Progress","Completed","Pending"]
             ➕ Add Technology Usage
           </button>
 
+
+        </div>
+<div className="space-y-4">
+      
+          {/* Proficiency Input */}
+         
+
+          {/* Add Technology Usage */}
+       
           <div className="mt-4">
             <h3 className="font-semibold text-gray-800">Technologies Used:</h3>
             <ul>

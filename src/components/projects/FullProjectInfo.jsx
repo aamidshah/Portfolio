@@ -7,11 +7,20 @@ import { FadeIn } from '../../framerMotion/Variants';
 import useGlobalStateStore from "../../store/useProjectStore";
 import StarRatings from "react-star-ratings";
 const FullProjectInfo = ({ onClose }) => {
-const {selectedProject,averageRating, fetchReviews,reviews,}  =  useGlobalStateStore();
+const {selectedProject , setProjectId, fetchReviews,reviews = [],}  =  useGlobalStateStore();
 
-  if (!selectedProject) return null;
-  const { _id, name, description, year, image, features, technologyUsage,link, gitLink, } = selectedProject;
-
+if (!selectedProject) {
+  console.error("Error: selectedProject is undefined!");
+  return null;
+}
+  const { _id, name, description, year,averageRating, image=[], features = [], technologyUsage,link, gitLink, } = selectedProject;
+// setProjectId(_id);
+  console.log("Updated average rating:", averageRating);
+  useEffect(() => {
+    if (selectedProject?._id) {
+      // fetchReviews();
+    }
+  }, [reviews]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -22,12 +31,7 @@ const {selectedProject,averageRating, fetchReviews,reviews,}  =  useGlobalStateS
   }, [onClose]);
 
   const technologyUsageKeys = technologyUsage ? Object.keys(technologyUsage) : [];
-  const handleScroll = (e) => {
-    const scrollTop = e.target.scrollTop;
-    const imageHeight = 500;
-     const newIndex = Math.round(scrollTop / imageHeight);
-     setSelectedIndex(newIndex);
-  };
+
 
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 backdrop-blur-md z-50">
@@ -145,33 +149,34 @@ const {selectedProject,averageRating, fetchReviews,reviews,}  =  useGlobalStateS
 
 
             <div className="flex-1 max-h-[400px] max-w-[400px] border border-grey-600 rounded-2xl overflow-hidden relative">
-              <div className="h-[500px] overflow-y-auto custom-scrollbar snap-y snap-mandatory md:block hidden" onScroll={handleScroll}>
-                {image && image.length > 0 ? (
-                  image?.map((img, index) => (
-                    <motion.img
-                      key={index}
-                      src={img}
-                      alt={`Project Image ${index + 1}`}
-                      className="w-full h-[500px] object-cover snap-center md:h-full rounded-xl shadow-md transition-opacity duration-300"
-                      variants={FadeIn("left", 0.2)}
-                      initial="hidden"
-                      whileInView="show"
-                      viewport={{ once: false, amount: 0.7 }}
-                    />
-                  ))
-                ) : (
-                  <div className="flex items-center justify-center h-[500px] text-gray-500 text-lg font-semibold">
-                    Oops!! No images available 😢
-                  </div>
-                )}
+              <div className="h-[500px] overflow-y-auto custom-scrollbar snap-y snap-mandatory md:block hidden" >
+              {Array.isArray(image) && image.length > 0 ? (
+  image.map((img, index) => (
+    <motion.img
+      key={index}
+      src={img}
+      alt={`Project Image ${index}`}
+      className="w-full h-[500px] object-cover snap-center md:h-full rounded-xl shadow-md transition-opacity duration-300"
+      variants={FadeIn("left", 0.2)}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: false, amount: 0.7 }}
+    />
+  ))
+) : (
+  <div className="flex items-center justify-center h-[500px] text-gray-500 text-lg font-semibold">
+    Oops!! No images available 😢
+  </div>
+)}
+
               </div>
               <div className="flex overflow-x-auto md:hidden max-h-[300px] w-[350px] custom-scrollbar space-x-4 justify-center">
-                {image && image.length > 0 ? (
-                  image?.map((img, index) => (
+                {Array.isArray(image) && image.length > 0 ? (
+                  image.map((img, index) => (
                     <motion.img
                       key={index}
                       src={img}
-                      alt={`Project Image ${index + 1}`}
+                      alt={`Project Image ${index}`}
                       className="h-[300px] max-h-[500px] w-[400px] object-cover rounded-xl shadow-md transition-opacity duration-300"
                       variants={FadeIn("left", 0.2)}
                       initial="hidden"
@@ -187,7 +192,7 @@ const {selectedProject,averageRating, fetchReviews,reviews,}  =  useGlobalStateS
               </div>
             </div>
           </div>
-          <ReviewForm projectId={_id} />
+          <ReviewForm project= {selectedProject} projectId={_id} />
         </div>
         <div className="bg-gray-900 py-4 px-6 flex justify-center gap-6 sticky bottom-0 border-t border-gray-700">
           {link && (
