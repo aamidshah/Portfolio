@@ -60,6 +60,8 @@ project,setProject,
         technology:"",
         usage:"" ,
         image: projectId.image, // Add image preview here
+        startDate: projectId.startDate ? projectId.startDate.split("T")[0] : "", 
+        endDate: projectId.endDate ? projectId.endDate.split("T")[0] : "",
 
       });
     }

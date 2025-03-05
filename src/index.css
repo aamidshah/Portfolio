@@ -178,7 +178,7 @@ body {
 }
 /* Hide scrollbar but still allow scrolling */
 body {
-  overflow: auto; /* Allow scrolling */
+  overflow: auto; 
   -ms-overflow-style: none;  /* For Internet Explorer and Edge */
   scrollbar-width: none;  /* For Firefox */
 }

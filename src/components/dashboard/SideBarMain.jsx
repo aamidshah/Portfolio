@@ -7,7 +7,7 @@ import { IoClose,IoArrowBack } from "react-icons/io5";
 import LoginMain from "../login/LoginMain";
 import ProjectInsights from "./projectsDash/ProjectInsights";
 import DashboardProjectsMain from "./projectsDash/DashboardProjectsMain";
-import Statisticts from "./statisticts/Statisticts";
+import StatistictsMain from "./statisticts/StatistictsMain";
 import SkillsMain from "./skills/SkillsMain";
 import Contribution from "./contribution/Contribution";
 import { useGlobalState } from "../../context/GlobalStateContext";
@@ -119,7 +119,7 @@ const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useG
           </li>
           <button 
           onClick={handleBackToHome} 
-          className="mt-6 flex items-center gap-1 text-white hover:!text-[var(--orange)] cursor-pointer"
+          className=" flex items-center gap-1 text-white hover:!text-[var(--orange)] cursor-pointer"
         >
           <IoArrowBack /> Back to Home
         </button>

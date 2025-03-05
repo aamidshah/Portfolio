@@ -114,7 +114,7 @@ const ProjectList = () => {
                 setLoading(false); // Simulate loading delay (remove if unnecessary)
               }, 1000);
             }}
-            className={`relative !bg-white dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
+            className={`relative !bg-[#e9ecf2] dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
 
 ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in update mode
           >

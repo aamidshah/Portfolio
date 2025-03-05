@@ -19,16 +19,21 @@ import DashboardProjects from "./components/dashboard/projectsDash/DashboardProj
 import Contribution from "./components/dashboard/contribution/Contribution";
 import ProjectInsights from "./components/dashboard/projectsDash/ProjectInsights";
 import SubSkills from "./components/skillSection/SubSkills";
-import Statistics from "./components/dashboard/statisticts/Statisticts";
+import StatistictsMain from "./components/dashboard/statisticts/StatistictsMain";
 import AddProjectsForm from "./components/dashboard/projectsDash/AddProjectForm";
 import AuthForm from "./components/login/AuthForm";
+import FullProjectInfo from "./components/projects/FullProjectInfo";
 const DashboardContent = () => {
   const { activeComponent } = useGlobalStateStore(); // Using Zustand store
 
   return (
-    <div className="lg:ml-[220px] xl:ml-[220px] p-4 lg:p-8">
+    <div className="lg:ml-[220px] xl:ml-[240px]  ">
+    {/* // <div className="lg:ml-[230px] xl:ml-[10px] w-full min-h-screen flex flex-col"> */}
+
       {activeComponent === "projects" && <DashboardProjects />}
-      {activeComponent === "statistics" && <Statistics />}
+      {activeComponent === "statistics" && <StatistictsMain />}
+      {activeComponent === "fullInfo" && <FullProjectInfo />}
+
       {activeComponent === "contribution" && <Contribution />}
       {activeComponent === "skills" && <SkillsMain />}
       {activeComponent === "insights" && <ProjectInsights />}
@@ -42,8 +47,8 @@ const App = () => {
   const { activeComponent } = useGlobalStateStore(); // Use Zustand store
 
   return (
- <main className="font-sans overflow-x-hidden overflow-y-auto min-h-screen w-full">
-      <ToastContainer autoClose={3000} />
+<main className="font-sans overflow-x-hidden w-full h-screen flex flex-col">
+<ToastContainer autoClose={3000} />
       <DashboardSidebar />
       <NavBarMain />
 

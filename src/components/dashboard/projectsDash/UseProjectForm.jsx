@@ -19,7 +19,6 @@ const useProjectForm = (
   setIsUpdating,
   projectId
 ) => {
-  // const { selectedProject, setSelectedProject } = useProjectStore(); // Get from store
   const { token } = useAuthStore()
   const [technologyUsage, setTechnologyUsage] = useState([]);
 
@@ -65,6 +64,7 @@ const useProjectForm = (
 
         .then((response) => {
           const fetchedProject = response.data;
+          console.log("fetched",fetchedProject);
 
           setProject({
             title: fetchedProject.name || "",
@@ -91,9 +91,8 @@ const useProjectForm = (
 
             status: fetchedProject.status || "Project Status",
 
-            startDate: fetchedProject.startDate || "",
-
-            endDate: fetchedProject.endDate || "",
+            startDate: fetchedProject.startDate ? new Date(fetchedProject.startDate).toISOString().split("T")[0] : "",
+            endDate: fetchedProject.endDate ? new Date(fetchedProject.endDate).toISOString().split("T")[0] : "",
 
             estimatedTime: fetchedProject.estimatedTime || "",
 
@@ -266,15 +265,6 @@ const useProjectForm = (
       usage: "",
     }));
   };
-  // const convertGoogleDriveLink = (url) => {
-  //   const match = url.match(/(?:drive\.google\.com\/file\/d\/|drive\.google\.com\/open\?id=|docs\.google\.com\/uc\?id=)([-\w]{25,})/);
-  //   if (match) {
-  //     const fileId = match[1];
-  //     return `https://lh3.googleusercontent.com/d/${fileId}=s500`;
-  //   }
-  //   console.error("Invalid Google Drive Link:", url);
-  //   return null;
-  // };
 
   const convertGoogleDriveLink = (url) => {
     if (!url) {

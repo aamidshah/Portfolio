@@ -11,17 +11,18 @@ const DashboardProjects = () => {
 
   
   return (
-<div className={`w-full lg:m-6 md:m-4 transition-all duration-300  `}>
+<div className={`w-full   transition-all duration-300  `}>
 {/* Back Arrow */}
 <div className='md:block lg:hidden'>
     <div
       onClick={() =>{  setShowSidebar(true)}}
-      className="flex items-center gap-1 text-white cursor-pointer hover:!text-[var(--orange)] mt-4"
+      className="flex items-center gap-1 text-white cursor-pointer hover:!text-[var(--orange)] ml-2 mt-2 mb-4"
     >
 <BackButton />    </div>
     </div>
-    <h2 className="text-2xl text-white font-bold mt-8">Projects Overview</h2>
-    <div className='flex flex-col gap-12'>
+    
+    <div className='flex !bg-[#e9ecf2] flex-col  gap-4'>
+    <h2 className="text-2xl text-black font-bold mt-4 lg:mt-10   ml-4">Projects Overview</h2>
     <ProjectInsights />
     <ProjectList />
     </div>
