@@ -14,7 +14,10 @@ const StatistictsMain = () => {
       </div>
       <div className='!bg-white flex flex-col gap-18  '>
       <ProjectProgressChart />
+      <div className='p-0 lg:px-30'>
       <RecentProjects />
+      </div>
+        
       <ProjectComplexityChart />
       <FeaturedProjects />
       <AllProjects />

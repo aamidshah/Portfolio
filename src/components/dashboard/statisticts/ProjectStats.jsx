@@ -80,23 +80,26 @@ const ProjectProgressChart = () => {
       </div>
 
       {/* 📈 Chart Section */}
-      <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data} margin={{ top: 40, right: 60, left: 30, bottom: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 0, 0, 0.1)" />
-          <XAxis dataKey="time" stroke="gray" />
-          <YAxis stroke="gray" />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend wrapperStyle={{ color: "#555" }} />
-          <Line
-            type="monotone"
-            dataKey="projects"
-            stroke="#3498db"
-            strokeWidth={2}
-            dot={{ fill: "#3498db", strokeWidth: 1, r: 5 }}
-            activeDot={{ r: 7 }}
-          />
-        </LineChart>
-      </ResponsiveContainer>
+      <div className="w-full sm:w-[90%] mx-auto px-0 sm:px-4">
+  <ResponsiveContainer width="100%" height={400}>
+    <LineChart data={data} margin={{ top: 40, right: 20, left: 20, bottom: 0 }}>
+      <CartesianGrid strokeDasharray="3 3" stroke="rgba(0, 0, 0, 0.1)" />
+      <XAxis dataKey="time" stroke="gray" />
+      <YAxis stroke="gray" />
+      <Tooltip content={<CustomTooltip />} />
+      <Legend wrapperStyle={{ color: "#555" }} />
+      <Line
+        type="monotone"
+        dataKey="projects"
+        stroke="#3498db"
+        strokeWidth={2}
+        dot={{ fill: "#3498db", strokeWidth: 1, r: 5 }}
+        activeDot={{ r: 7 }}
+      />
+    </LineChart>
+  </ResponsiveContainer>
+</div>
+
     </div>
   );
 };
