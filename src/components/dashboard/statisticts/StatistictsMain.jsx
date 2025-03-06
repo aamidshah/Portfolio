@@ -5,6 +5,7 @@ import ProjectComplexityChart from './ProjectComplexity'
 import FeaturedProjects from './FeaturedProjects'
 import AllProjects from './AllProjects'
 import RecentProjects from './RecentProjects'
+import EstimatedTime from './Estimated'
 const StatistictsMain = () => {
   return (
     <div className=' h-full  w-full'> 
@@ -14,11 +15,12 @@ const StatistictsMain = () => {
       </div>
       <div className='!bg-white flex flex-col gap-18  '>
       <ProjectProgressChart />
-      <div className='p-0 lg:px-30'>
+      <div className='p-0 xl:px-30'>
       <RecentProjects />
       </div>
         
       <ProjectComplexityChart />
+      <EstimatedTime/>
       <FeaturedProjects />
       <AllProjects />
       </div>

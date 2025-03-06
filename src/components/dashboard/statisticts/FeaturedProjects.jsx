@@ -15,41 +15,40 @@ const FeaturedProjects = () => {
 setSelectedProject(null)  }
   return (
     <div className="py-8">
-      <h2 className="text-2xl font-bold mb-6 text-center">Featured Projects</h2>
-
-      {selectedProject ? (
-        <FullProjectInfo onClose={handleCLick} />
-      ) : (
-        featuredProjects.length > 0 ? (
-          <ul className="flex flex-col md:flex-row flex-wrap mt-12 justify-center gap-6">
-            {featuredProjects.map((project) => (
-              <li
-                key={project._id}
-                className="bg-[#e9ecf2] shadow-lg rounded-2xl p-6 border border-gray-200 transform transition duration-300 hover:scale-105 hover:shadow-xl w-full md:w-1/3 lg:w-1/4 cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <img
-                  src={project.image || "/default-project.jpg"}
-                  alt={project.name}
-                  className="w-full h-48 object-cover rounded-xl mb-4"
-                />
-                <h3 className="text-xl font-semibold">{project.name}</h3>
-                <h2>{project.status}</h2>
-                  <div className="text-black flex items-center mt-0">
-                                {project.averageRating ? (
-                                  <ReactStars count={5} value={project.averageRating} size={20} edit={false} activeColor="#ffd700" />
-                                ) : (
-                                  <p className="text-gray-500">No ratings yet</p>
-                                )}
-                              </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-center text-gray-500">No featured projects available.</p>
-        )
-      )}
-    </div>
+    <h2 className="text-2xl font-bold mb-6 text-center">Featured Projects</h2>
+  
+    {selectedProject ? (
+      <FullProjectInfo onClose={handleCLick} />
+    ) : featuredProjects.length > 0 ? (
+      <ul className="flex flex-wrap justify-center gap-6 mt-12">
+        {featuredProjects.map((project) => (
+          <li
+            key={project._id}
+            className="bg-[#e9ecf2] shadow-lg rounded-2xl p-6 border border-gray-200 transform transition duration-300 hover:scale-105 hover:shadow-xl w-[90%] sm:w-[70%] md:max-w-sm lg:w-1/4 cursor-pointer"
+            onClick={() => setSelectedProject(project)}
+          >
+            <img
+              src={project.image || "/default-project.jpg"}
+              alt={project.name}
+              className="w-full h-48 object-cover rounded-xl mb-4"
+            />
+            <h3 className="text-xl font-semibold">{project.name}</h3>
+            <h2>{project.status}</h2>
+            <div className="text-black flex items-center mt-0">
+              {project.averageRating ? (
+                <ReactStars count={5} value={project.averageRating} size={20} edit={false} activeColor="#ffd700" />
+              ) : (
+                <p className="text-gray-500">No ratings yet</p>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p className="text-center text-gray-500">No featured projects available.</p>
+    )}
+  </div>
+  
   );
 };
 
