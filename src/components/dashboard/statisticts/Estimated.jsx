@@ -233,6 +233,8 @@ const TimeTrendGraph = ({ projects }) => {
       <CartesianGrid strokeDasharray="3 3" />
       <Tooltip 
         formatter={(value, name) => [`${value} days`, name]} // Append "days" to values
+        contentStyle={{ backgroundColor: '#dafddd', color: '#33aa33', borderRadius: '8px', border: 'none', padding: '8px' }} // Grey background
+
       />
       <Line type="monotone" dataKey="estimatedTime" stroke="#8884d8" />
       <Line type="monotone" dataKey="actualTime" stroke="#82ca9d" />
