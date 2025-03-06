@@ -25,3 +25,5 @@ dist-ssr
 .vercel
 # Ignore the backend folder
 .env*.local
+.evv.production
+.env
