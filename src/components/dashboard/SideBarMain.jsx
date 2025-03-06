@@ -9,11 +9,11 @@ import ProjectInsights from "./projectsDash/ProjectInsights";
 import DashboardProjectsMain from "./projectsDash/DashboardProjectsMain";
 import StatistictsMain from "./statisticts/StatistictsMain";
 import SkillsMain from "./skills/SkillsMain";
-import Contribution from "./contribution/Contribution";
+import ContributionMain from "./contribution/ContributionMain";
 import { useGlobalState } from "../../context/GlobalStateContext";
 import useGlobalStateStore from "../../store/useProjectStore";
 const DashboardSidebar = () => {
-  // const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useGlobalState();
+ 
 
 const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useGlobalStateStore();
 
@@ -47,7 +47,10 @@ const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useG
 
 
 
-          <li onClick={() => {setShowSidebar(false); setActiveComponent("contributions")}}  className={`flex items-center gap-2 cursor-pointer hover:text-[var(--orange)] ${
+          <li onClick={() => {setShowSidebar(false); setActiveComponent("contributions")
+              // console.log("Contributions Clicked! Active Component:", activeComponent);
+
+          }}  className={`flex items-center gap-2 cursor-pointer hover:text-[var(--orange)] ${
       activeComponent === "contributions" ? "text-[var(--orange)]" : ""
     }`}>
             <FaCode /> Contributions

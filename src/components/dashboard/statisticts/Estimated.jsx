@@ -35,7 +35,7 @@ return (
       </p>
     </div>
 
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-18">
+    <div className="grid grid-cols-1  md:grid-cols-2 gap-18">
       {/* Category-wise Completion Table */}
       <div>
         <h3 className="text-lg font-medium mt-4">📌 Category-wise Average Completion Time</h3>
@@ -233,7 +233,7 @@ const TimeTrendGraph = ({ projects }) => {
       <CartesianGrid strokeDasharray="3 3" />
       <Tooltip 
         formatter={(value, name) => [`${value} days`, name]} // Append "days" to values
-        contentStyle={{ backgroundColor: '#dafddd', color: '#33aa33', borderRadius: '8px', border: 'none', padding: '8px' }} // Grey background
+        contentStyle={{ backgroundColor: '#abfbba', color: '#33aa33', borderRadius: '8px', border: 'none', padding: '8px' }} // Grey background
 
       />
       <Line type="monotone" dataKey="estimatedTime" stroke="#8884d8" />

@@ -16,7 +16,7 @@ import ContactMain from "./components/contactsSection/ContactMain";
 import FooterMain from "./components/footer/FooterMain";
 import DashboardSidebar from "./components/dashboard/SideBarMain";
 import DashboardProjects from "./components/dashboard/projectsDash/DashboardProjectsMain";
-import Contribution from "./components/dashboard/contribution/Contribution";
+import ContributionMain from "./components/dashboard/contribution/ContributionMain";
 import ProjectInsights from "./components/dashboard/projectsDash/ProjectInsights";
 import SubSkills from "./components/skillSection/SubSkills";
 import StatistictsMain from "./components/dashboard/statisticts/StatistictsMain";
@@ -34,7 +34,7 @@ const DashboardContent = () => {
       {activeComponent === "statistics" && <StatistictsMain />}
       {activeComponent === "fullInfo" && <FullProjectInfo />}
 
-      {activeComponent === "contribution" && <Contribution />}
+      {activeComponent === "contributions" && <ContributionMain />}
       {activeComponent === "skills" && <SkillsMain />}
       {activeComponent === "insights" && <ProjectInsights />}
       {activeComponent === "addProjectForm" && <AddProjectsForm />}
