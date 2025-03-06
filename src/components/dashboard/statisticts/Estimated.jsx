@@ -234,11 +234,14 @@ const TimeTrendGraph = ({ projects }) => {
       <XAxis dataKey="name" />
       <YAxis />
       <CartesianGrid strokeDasharray="3 3" />
-      <Tooltip />
+      <Tooltip 
+        formatter={(value, name) => [`${value} days`, name]} // Append "days" to values
+      />
       <Line type="monotone" dataKey="estimatedTime" stroke="#8884d8" />
       <Line type="monotone" dataKey="actualTime" stroke="#82ca9d" />
     </LineChart>
   </ResponsiveContainer>
+  
   );
 };
 
