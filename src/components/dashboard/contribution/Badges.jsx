@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import useGlobalStateStore from "../../../store/useProjectStore";
+import useAuthStore from "../../../store/authStore";
 
 const ContributorBadges = () => {
   const { projects } = useGlobalStateStore();
   const [showAll, setShowAll] = useState(false);
+  const { isAuthenticated } = useAuthStore();
+
 
   // Count occurrences of each contributor across all projects
   const contributorCounts = projects.reduce((acc, project) => {
@@ -37,15 +40,27 @@ const ContributorBadges = () => {
       <h2 className="text-xl flex items-center justify-center font-bold mb-4">
         🏅 Top Contributors & Achievements
       </h2>
-      <div className="grid md:grid-cols-3 px-4 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-3 px-8 lg:grid-cols-3 gap-8 mx-8">
         {displayedContributors.map(({ name, contributions, rank }) => (
           <div
             key={name}
-            className="p-4 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-100"
+            className="p-4 bg-[#e9ecf2]  rounded-lg shadow-md flex flex-col items-center text-center border border-gray-100"
           >
             <span className="text-md">{getBadge(rank)}</span>
-            <h3 className="text-gray-500 mt-2">{name}</h3>
-            <p className="text-gray-600">Projects Contributed: {contributions}</p>
+            <h3 className="text-gray-500 mt-2">
+              { isAuthenticated?
+                {name}
+                :  <span className="relative group cursor-pointer  text-red-500">
+                Hidden
+                <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block bg-gray-500 text-white text-xs rounded-md px-5 py-0 shadow-lg">
+                  You must log in to see contributors
+                </span>
+              </span>
+
+              }
+              </h3>
+            <p className="text-[0.9rem] text-gray-600">Projects Contributed: <span className="text-blue-700 font-semibold"  >{contributions}
+              </span> </p>
           </div>
         ))}
       </div>

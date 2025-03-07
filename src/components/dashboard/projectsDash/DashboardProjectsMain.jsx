@@ -22,7 +22,7 @@ const DashboardProjects = () => {
     </div>
     
     <div className='flex !bg-[#e9ecf2] flex-col  gap-4'>
-    <h2 className="text-2xl text-black font-bold mt-4 lg:mt-10   ml-4">Projects Overview</h2>
+    {/* <h2 className="text-2xl text-black font-bold mt-4 lg:mt-10   ml-4">Projects Overview</h2> */}
     <ProjectInsights />
     <ProjectList />
     </div>

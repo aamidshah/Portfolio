@@ -148,7 +148,7 @@ const AuthForm = () => {
         {/* Close Button */}
         <button
           className="absolute top-2 right-3 text-gray-400 hover:text-white"
-          onClick={() => setActiveComponent(null)}
+          onClick={() => setActiveComponent("projects")}
         >
           ✖
         </button>

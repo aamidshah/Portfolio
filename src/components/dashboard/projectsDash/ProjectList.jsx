@@ -82,7 +82,7 @@ const ProjectList = () => {
 
 
   return (
-    <div className="bg-gray-100 rounded-xl dark:bg-gray-900 min-h-screen py-2 px-5">
+    <div className="bg-[#e9ecf2]rounded-xl shadow-2xl p-4  dark:bg-gray-900 min-h-screen py-2 px-5">
       <div className="flex items-center justify-between  flex-col gap-8 sm:flex-row lg:justify-start mb-5 mt-4">
         <div className="flex items-start  md:justify-start xl:justify-center xl:ml-[157px]">
           <div className="flex items-center justify-center  gap-[100px]">
@@ -99,7 +99,7 @@ const ProjectList = () => {
 
 
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid pt-18 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {projects.map((project, index) => (
           <div
             key={project._id}
@@ -114,7 +114,7 @@ const ProjectList = () => {
                 setLoading(false); // Simulate loading delay (remove if unnecessary)
               }, 1000);
             }}
-            className={`relative !bg-[#e9ecf2] dark:bg-gray-800 shadow-lg rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
+            className={`relative !bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
 
 ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in update mode
           >
