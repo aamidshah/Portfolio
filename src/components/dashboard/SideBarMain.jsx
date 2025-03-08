@@ -27,7 +27,7 @@ const { setActiveComponent, activeComponent, showSidebar,setShowSidebar } = useG
   return (
     <>
       {/* Sidebar for large screens */}
-      <aside className="lg:flex flex-col hidden fixed left-0 top-0 h-screen w-[220px] xl:w-[260px] bg-[var(--darkGrey)] text-white p-6 z-50 shadow-lg">
+      <aside className="lg:flex flex-col hidden fixed left-0 top-0 h-screen w-[220px] xl:w-[240px] bg-[var(--darkGrey)] text-white p-6 z-50 shadow-lg">
     
 
       
