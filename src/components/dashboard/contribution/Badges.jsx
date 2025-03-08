@@ -49,7 +49,7 @@ const ContributorBadges = () => {
             <span className="text-md">{getBadge(rank)}</span>
             <h3 className="text-gray-500 mt-2">
               { isAuthenticated?
-                {name}
+                name
                 :  <span className="relative group cursor-pointer  text-red-500">
                 Hidden
                 <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 hidden group-hover:block bg-gray-500 text-white text-xs rounded-md px-5 py-0 shadow-lg">

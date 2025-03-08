@@ -22,9 +22,12 @@ import SubSkills from "./components/skillSection/SubSkills";
 import StatistictsMain from "./components/dashboard/statisticts/StatistictsMain";
 import AddProjectsForm from "./components/dashboard/projectsDash/AddProjectForm";
 import AuthForm from "./components/login/AuthForm";
+import SkillsMainDash from "./components/dashboard/skills/SkillsMainDash";
 import FullProjectInfo from "./components/projects/FullProjectInfo";
+import SkillForm from "./components/dashboard/skills/SkillForm";
 const DashboardContent = () => {
   const { activeComponent } = useGlobalStateStore(); // Using Zustand store
+  console.log("Active Component:", activeComponent); // Debugging
 
   return (
     <div className="lg:ml-[220px] xl:ml-[240px]  ">
@@ -39,6 +42,8 @@ const DashboardContent = () => {
       {activeComponent === "insights" && <ProjectInsights />}
       {activeComponent === "addProjectForm" && <AddProjectsForm />}
       {activeComponent === "authScreen" && <AuthForm />}
+      {activeComponent === "Skills" && <SkillsMainDash />}
+      {activeComponent === "skillForm" && <SkillForm />}
     </div>
   );
 };
@@ -47,7 +52,7 @@ const App = () => {
   const { activeComponent } = useGlobalStateStore(); // Use Zustand store
 
   return (
-<main className="font-sans overflow-x-hidden w-full h-screen flex flex-col">
+<main className="font-sans overflow-x-hidden w-screen min-h-screen flex flex-col relative">
 <ToastContainer autoClose={3000} />
       <DashboardSidebar />
       <NavBarMain />

@@ -8,7 +8,7 @@ import LoginMain from "../login/LoginMain";
 import ProjectInsights from "./projectsDash/ProjectInsights";
 import DashboardProjectsMain from "./projectsDash/DashboardProjectsMain";
 import StatistictsMain from "./statisticts/StatistictsMain";
-import SkillsMain from "./skills/SkillsMain";
+import SkillsMain from "./skills/SkillsMainDash";
 import ContributionMain from "./contribution/ContributionMain";
 import { useGlobalState } from "../../context/GlobalStateContext";
 import useGlobalStateStore from "../../store/useProjectStore";

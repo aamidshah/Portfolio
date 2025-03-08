@@ -1,73 +1,58 @@
-
-import React from 'react'
-import { FaHtml5, FaReact } from "react-icons/fa";
-import { FaCss3Alt } from "react-icons/fa";
-import { IoLogoJavascript } from "react-icons/io";
-import { SiTypescript } from "react-icons/si";
-import { SiRedux } from "react-icons/si";
-import { RiTailwindCssFill } from "react-icons/ri";
-import { IoLogoReact } from "react-icons/io5";
-import { FaPython } from "react-icons/fa";
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FadeIn } from '../../framerMotion/Variants'
+import { FadeIn } from '../../framerMotion/Variants';
+import useSkillStore from '../../store/useSkillStore';
 
+// Importing icons
+import { FaHtml5, FaCss3Alt, FaReact, FaPython } from "react-icons/fa";
+import { IoLogoJavascript, IoLogoReact } from "react-icons/io5";
+import { SiTypescript, SiRedux, SiTailwindcss } from "react-icons/si";
 
+const iconMapping = {
+  HTML: FaHtml5,
+  CSS: FaCss3Alt,
+  JavaScript: IoLogoJavascript,
+  TypeScript: SiTypescript,
+  React: IoLogoReact,
+  Redux: SiRedux,
+  Tailwind: SiTailwindcss,
+  Python: FaPython
+};
 
-
-const skills = [
-  {
-    skill: 'HTML',
-    icon: FaHtml5
-  },
-  {
-    skill: 'CSS',
-    icon: FaCss3Alt
-  },
-  {
-    skill: 'JavaScript',
-    icon: IoLogoJavascript
-  },
-  {
-    skill: 'TypeScript',
-    icon: SiTypescript
-  },
-  {
-    skill: 'React',
-    icon: IoLogoReact
-  },
-  {
-    skill: 'Redux',
-    icon: SiRedux
-  },
-  {
-    skill: 'Tailwind',
-    icon: RiTailwindCssFill
-  },
-   {
-      skill: 'python',
-      icon: FaPython
-  
-    }
-];
+// Function to get the corresponding icon component
+const getSkillIcon = (skillName) => {
+  return iconMapping[skillName] || FaReact; // Default to React icon if not found
+};
 
 const AllSkillsSm = () => {
+  const { skills } = useSkillStore(); // Fetch skills from Zustand store
+
   return (
     <div className='grid grid-cols-2 md:grid-cols-4 gap-12 my-12 justify-center'>
-      {
-        skills.map((item, index) => (
-          <motion.div  
-            variants={FadeIn('up', 0.2) }
-                       initial = 'hidden'
-                       whileInView = 'show'
-                       viewport={{once: false, amount: 0.7}}
-          key={index} className='flex flex-col items-center'>
-            <item.icon className='text-7xl text-orange' />
-            <p className='text-center text-white mt-4'>{item.skill}</p>
-          </motion.div>
-        ))
-      }
+      {skills.length > 0 ? (
+        skills.map((item, index) => {
+          const IconComponent = getSkillIcon(item.name); // Get the corresponding icon
+          return (
+            <motion.div  
+              key={item._id}
+              variants={FadeIn('up', 0.2)}
+              initial='hidden'
+              whileInView='show'
+              viewport={{ once: false, amount: 0.7 }}
+              className='flex flex-col items-center'
+            >
+              <IconComponent className='text-7xl text-orange' />
+              <p className='text-center text-white mt-4'>{item.name}</p>
+            </motion.div>
+          );
+        })
+      ) : (
+        <p className="text-center text-white col-span-2 md:col-span-4">
+          No skills available.
+        </p>
+      )}
     </div>
   );
-}
+};
 
 export default AllSkillsSm;

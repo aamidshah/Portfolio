@@ -10,6 +10,7 @@ const projectRoutes = require("./api/routes/projectRoutes");
 const reviewRoutes = require("./api/routes/reviews");
 const authRoutes = require("./api/routes/authRoutes");
 const statsRoutes = require("./api/routes/statsRoutes");
+const SkillsRoutes = require("./api/routes/SkillsRoutes");
 
 dotenv.config();
 const app = express();
@@ -42,6 +43,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/stats", statsRoutes);
+app.use("/api/skills", SkillsRoutes)
 app.get("/api/test", (req, res) => {
   res.json({ message: "API is working!" });
 });
