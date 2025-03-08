@@ -85,11 +85,16 @@ const ProjectList = () => {
     <div className="bg-[#e9ecf2]rounded-xl shadow-2xl p-4  dark:bg-gray-900 min-h-screen py-2 px-5">
       <div className="flex items-center justify-between  flex-col gap-8 sm:flex-row lg:justify-start mb-5 mt-4">
         <div className="flex items-start  md:justify-start xl:justify-center xl:ml-[157px]">
+          {isUserAuthenticated ?(
+
+          
           <div className="flex items-center justify-center  gap-[100px]">
           <UpdateButton HandleClick={handleEnableUpdateMode} />
 
           <AddButton HandleClick={handleAddProject} />
-        </div></div>
+        </div>
+        
+         ): <span className=" font-semibold text-center text-red-500 dark:text-white">To Enable Update or Add Mode Mode You Need To Log In!!!</span> }</div>
 
         <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white flex-1">
           My Projects
@@ -99,7 +104,7 @@ const ProjectList = () => {
 
 
 
-      <div className="grid pt-18 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid pt-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {projects.map((project, index) => (
           <div
             key={project._id}
