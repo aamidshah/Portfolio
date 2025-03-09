@@ -17,7 +17,7 @@ const NavBarMain = () => {
   if (activeComponent) return null;
 
   return (
-    <nav className="fixed flex flex-row top-4 left-0 lg:left-[220px] xl:left-[260px] w-full lg:w-[calc(100%-220px)] xl:w-[calc(100%-260px)] z-30 px-4">
+    <nav className="fixed flex flex-row top-4 left-0 lg:left-[220px] xl:left-[260px] w-full lg:px-2 lg:w-[calc(100%-220px)] xl:w-[calc(100%-260px)] z-30 ">
       <div className="flex justify-between w-full max-w-[1280px] mx-auto bg-black items-center p-[1.1rem] rounded-r-full rounded-l-full border-[0.5px] border-orange">
         <NavBarLogo />
         <div className={`lg:flex ${showMenu ? "block" : "hidden"} lg:items-center absolute lg:static top-full left-0 w-full bg-black lg:w-auto lg:bg-transparent z-40 mt-6 lg:mt-0`}>

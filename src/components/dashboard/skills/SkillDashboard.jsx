@@ -6,7 +6,8 @@ import { Pencil, Trash } from "lucide-react";
 import useAuthStore from "../../../store/authStore"; // Import authentication state
 import useGlobalStateStore from "../../../store/useProjectStore";
 import AddSkill from "./AddSkill";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; 
 const SkillRow = ({ skill }) => {
   const { setActiveComponent ,activeComponent} = useGlobalStateStore();
   const {setSelectedSkill} = useSkillStore()
@@ -22,9 +23,36 @@ const SkillRow = ({ skill }) => {
   };
 
   const handleDelete = async () => {
-    if (confirm(`Are you sure you want to delete ${skill.name}?`)) {
-      await deleteSkill(skill._id, token);
-    }
+    toast.warn(
+      ({ closeToast }) => (
+        <div>
+          <p>Are you sure you want to delete <strong>{skill.name}</strong>?</p>
+          <div className="flex justify-center gap-3 mt-2">
+            <button
+              className="bg-red-500 text-white px-3 py-1 rounded"
+              onClick={async () => {
+                try {
+                  await deleteSkill(skill._id, token);
+                  toast.success(`${skill.name} deleted successfully! ✅`);
+                } catch (error) {
+                  toast.error(`Error deleting ${skill.name}: ${error.message}`);
+                }
+                closeToast();
+              }}
+            >
+              Confirm
+            </button>
+            <button
+              className="bg-gray-500 text-white px-3 py-1 rounded"
+              onClick={closeToast}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      { autoClose: false, closeOnClick: false }
+    );
   };
 
   return (
