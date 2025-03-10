@@ -30,6 +30,7 @@
     "react-scroll": "^1.9.2",
     "react-star-ratings": "^2.3.0",
     "react-toastify": "^11.0.3",
+    "react-tooltip": "^5.28.0",
     "recharts": "^2.15.1",
     "tailwindcss": "^4.0.0",
     "zustand": "^5.0.3"

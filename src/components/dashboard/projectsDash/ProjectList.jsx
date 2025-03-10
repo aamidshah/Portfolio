@@ -37,6 +37,26 @@ const ProjectList = () => {
   } = useGlobalStateStore();
   const isUserAuthenticated = useAuthStore((state) => state.isAuthenticated); // ✅ Correct way to access Zustand state
 
+
+
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedComplexity, setSelectedComplexity] = useState("All");
+
+  // Extract unique categories, statuses, and complexities
+  const categories = ["All", ...new Set(projects.map((p) => p.category))];
+  const statuses = ["All", ...new Set(projects.map((p) => p.status))];
+  const complexities = ["All", ...new Set(projects.map((p) => p.complexity))];
+
+  // Filter projects based on user input
+  const filteredProjects = projects.filter((project) =>
+    (selectedCategory === "All" || project.category === selectedCategory) &&
+    (selectedStatus === "All" || project.status === selectedStatus) &&
+    (selectedComplexity === "All" || project.complexity === selectedComplexity) &&
+    project.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   
   useEffect(() => {
     fetchProjects();
@@ -102,10 +122,58 @@ const ProjectList = () => {
       </div>
 
 
+      <div className="flex flex-wrap justify-start xl:pl-30 p-4 items-start gap-4">
+        <input
+          type="text"
+          placeholder="Search projects..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="border border-gray-300 rounded-lg p-2 w-56"
+        />
 
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className="border border-gray-300 rounded-lg p-2"
+        >
+          {categories.map((category) => (
+            <option key={category} value={category}>{category}</option>
+          ))}
+        </select>
 
-      <div className="grid pt-8 grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-        {projects.map((project, index) => (
+        <div className="flex gap-2">
+          {statuses.map((status) => (
+            <button
+              key={status}
+              onClick={() => setSelectedStatus(status)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedStatus === status ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white"
+              }`}
+            >
+              {status}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex gap-2">
+          {complexities.map((complexity) => (
+            <button
+              key={complexity}
+              onClick={() => setSelectedComplexity(complexity)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedComplexity === complexity ? "bg-blue-500 text-white" : "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white"
+              }`}
+            >
+              {complexity}
+            </button>
+          ))}
+        </div>
+      </div>
+
+  
+
+      <div className="grid pt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 md:p-4 gap-8 max-w-7xl mx-auto auto-rows-fr">
+      {filteredProjects.map((project, index) => (
           <div
             key={project._id}
             onClick={() => {
@@ -119,7 +187,7 @@ const ProjectList = () => {
                 setLoading(false); // Simulate loading delay (remove if unnecessary)
               }, 1000);
             }}
-            className={`relative !bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105
+            className={`relative !bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden transform transition-all duration-300 hover:scale-105 flex flex-col h-full
 
 ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in update mode
           >
@@ -142,7 +210,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
               </div>
             )}
 
-            <div className="p-5">
+<div className="p-5 flex flex-col flex-grow">
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
                 {project.name}
               </h2>
@@ -175,13 +243,13 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
   <p>No ratings yet</p>
 )}
 
-              <div className="flex md:justify-between justify-evenly xl:justify-evenly lg:flex-row md:gap-3 md:mr-14 flex-row items-center mt-5">
-                <a
+<div className="mt-auto flex pt-2 justify-start xl:gap-14 gap-2">
+<a
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm xl:px-4 xl:py-2 lg:py-[0.2rem] transition-all duration-200"
-                >
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm xl:px-4 xl:py-2 lg:py-2 lg:px-2 transition-all duration-200"
+                  >
                   Live Demo
                 </a>
 
@@ -189,8 +257,8 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
                   href={project.gitLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 hover:bg-gray-900 text-white px-4 py-2 rounded-lg text-sm lg:px-2 lg:py-[0.2rem] xl:px-4 xl:py-2 transition-all duration-200"
-                >
+                  className="bg-gray-800 hover:bg-gray-900 text-white px-2 py-2 rounded-lg text-sm transition-all duration-200"
+                  >
                   GitHub Repo
                 </a>
               </div>
@@ -199,8 +267,8 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
             {/* Delete Button (Bottom Right Corner) */}
 
             <button
-              className="absolute bottom-6 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
-              onClick={(e) => {
+    className="absolute bottom-5 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
+    onClick={(e) => {
                 e.stopPropagation();
                   handleDelete(project._id);
               

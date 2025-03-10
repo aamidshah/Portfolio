@@ -7,7 +7,7 @@ const Skill = require("../models/skillsModel"); // Ensure correct path
 // @access  Public
 const getSkills = async (req, res) => {
   try {
-    const skills = await Skill.find(); // Fetch all skills
+    const skills = await Skill.find().populate("relatedSkills", "name"); // Populate related skills with only the name field
     res.json(skills);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -39,7 +39,7 @@ const getSkillsByProject = async (req, res) => {
 // @access  Protected
 const AddSkill = async (req, res) => {
   try {
-    const { name, proficiency, category } = req.body;
+    const { name, proficiency, category,relatedSkills } = req.body;
 
     // Check if skill already exists
     const existingSkill = await Skill.findOne({ name });
@@ -47,7 +47,7 @@ const AddSkill = async (req, res) => {
       return res.status(400).json({ message: "Skill already exists" });
     }
 
-    const skill = new Skill({ name, proficiency, category });
+    const skill = new Skill({ name, proficiency, category, relatedSkills });
     await skill.save();
     res.status(201).json({
       message: "Skill added successfully",
@@ -64,7 +64,7 @@ const AddSkill = async (req, res) => {
 const UpdateSkill = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, category, proficiency } = req.body;
+    const { name, category, proficiency,relatedSkills } = req.body;
 
     // Check if another skill with the same name exists
     const existingSkill = await Skill.findOne({ name });
@@ -76,7 +76,7 @@ const UpdateSkill = async (req, res) => {
 
     const updatedSkill = await Skill.findByIdAndUpdate(
       id,
-      { name, category, proficiency },
+      { name, category, proficiency ,relatedSkills},
       { new: true, runValidators: true }
     );
 

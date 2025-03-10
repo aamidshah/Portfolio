@@ -23,6 +23,7 @@ const { setActiveComponent } = useGlobalStateStore();
 const { token } = useAuthStore(); // ✅ Get token from auth store
 const [customCategory, setCustomCategory] = useState(""); // New state for user input
 
+
 const [formData, setFormData] = useState({
   name: "",
   category: "",
