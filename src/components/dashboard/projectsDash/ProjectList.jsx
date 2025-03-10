@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { FaTrash } from "react-icons/fa"; // Importing trash icon
+import { Pencil, Trash, Plus } from "lucide-react";
 
 import FullProjectInfo from "../../projects/FullProjectInfo";
 
@@ -104,19 +105,9 @@ const ProjectList = () => {
   return (
     <div className="bg-[#e9ecf2]rounded-xl shadow-2xl p-4  dark:bg-gray-900 min-h-screen py-2 px-5">
       <div className="flex items-center justify-between  flex-col gap-8 sm:flex-row lg:justify-start mb-5 mt-4">
-        <div className="flex items-start  md:justify-start xl:justify-center xl:ml-[157px]">
-          {isUserAuthenticated ?(
+   
 
-          
-          <div className="flex items-center justify-center  gap-[100px]">
-          <UpdateButton HandleClick={handleEnableUpdateMode} />
-
-          <AddButton HandleClick={handleAddProject} />
-        </div>
-        
-         ): <span className=" font-semibold text-center text-red-500 dark:text-white">To Enable Update or Add Mode Mode You Need To Log In!!!</span> }</div>
-
-        <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-white flex-1">
+        <h1 className="text-4xl font-bold text-center mt-8 text-gray-800 dark:text-white flex-1">
           My Projects
         </h1>
       </div>
@@ -168,6 +159,16 @@ const ProjectList = () => {
             </button>
           ))}
         </div>
+        {isUserAuthenticated ?(
+
+          
+<div className="flex    gap-4">
+<UpdateButton HandleClick={handleEnableUpdateMode} />
+
+<AddButton HandleClick={handleAddProject} />
+</div>
+
+): <span className=" font-semibold text-center text-red-500 dark:text-white">To Enable Update or Add Mode Mode You Need To Log In!!!</span> }
       </div>
 
   
@@ -248,7 +249,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm xl:px-4 xl:py-2 lg:py-2 lg:px-2 transition-all duration-200"
+                  className="bg-gray-100 hover:bg-gray-200 font-bold px-4 py-2 rounded-full text-sm xl:px-4 xl:py-2 lg:py-2 lg:px-2 transition-all duration-200"
                   >
                   Live Demo
                 </a>
@@ -257,7 +258,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
                   href={project.gitLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-800 hover:bg-gray-900 text-white px-2 py-2 rounded-lg text-sm transition-all duration-200"
+                  className="bg-gray-100 hover:bg-gray-200 font-bold px-2 py-2 rounded-full text-sm transition-all duration-200"
                   >
                   GitHub Repo
                 </a>
@@ -267,7 +268,7 @@ ${isUpdating ? "border-4 border-blue-500" : ""}`} // Highlight selection when in
             {/* Delete Button (Bottom Right Corner) */}
 
             <button
-    className="absolute bottom-5 right-3 bg-red-500 hover:bg-red-700 text-white p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
+    className="absolute bottom-5 right-3 bg-gray-100 hover:bg-gray-200  text-gray-500 p-2 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
     onClick={(e) => {
                 e.stopPropagation();
                   handleDelete(project._id);
