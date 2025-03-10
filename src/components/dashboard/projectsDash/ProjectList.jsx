@@ -113,7 +113,7 @@ const ProjectList = () => {
       </div>
 
 
-      <div className="flex flex-wrap justify-start xl:pl-30 p-4 items-start gap-4">
+      <div className="flex flex-wrap justify-start xl:justify-center xl:items-center p-4 items-start gap-4">
         <input
           type="text"
           placeholder="Search projects..."
