@@ -210,8 +210,7 @@ const SkillsDashboard = () => {
       {error && <p className="text-red-500">Error loading skills: {error}</p>}
 
       <p className="text-gray-600 mb-6">
-        Here is a breakdown of your skills, categorized by proficiency level. 
-        Use this dashboard to track and manage your technical expertise.
+        Here is a breakdown of my skills, categorized by proficiency level. 
       </p>
 
       {/* Search and Filter Section */}
