@@ -113,7 +113,7 @@ const ProjectList = () => {
       </div>
 
 
-      <div className="flex flex-wrap justify-start xl:justify-center xl:items-center p-4 items-start gap-4">
+      <div className="flex flex-wrap pt-10 justify-start xl:justify-center xl:items-center p-4 items-start gap-4">
         <input
           type="text"
           placeholder="Search projects..."
@@ -173,7 +173,7 @@ const ProjectList = () => {
 
   
 
-      <div className="grid pt-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 md:p-4 gap-8 max-w-7xl mx-auto auto-rows-fr">
+      <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-10 md:p-4 gap-8 max-w-7xl mx-auto auto-rows-fr">
       {filteredProjects.map((project, index) => (
           <div
             key={project._id}

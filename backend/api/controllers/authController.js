@@ -2,6 +2,8 @@ const User = require("../models/AuthModel"); // Ensure correct path
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
+const crypto = require("crypto"); // ✅ For generating tokens
+const nodemailer = require("nodemailer"); 
 
 // Generate JWT Token
 const generateToken = (user) => {
@@ -120,4 +122,3 @@ exports.logout = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-

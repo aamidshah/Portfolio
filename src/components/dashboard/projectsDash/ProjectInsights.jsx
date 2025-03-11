@@ -70,11 +70,11 @@ const mostUsedTechText = mostUsedTech.name
   ];
 
   return (
-    <div className="p-12 xl:mx-12 shadow-xl rounded-2xl   !bg-[#e9ecf2]  ">
+    <div className="p-12 shadow-xl rounded-xl  mx-10 xl:mx-30 mt-8   !bg-[#e9ecf2] ">
       <h2 className="text-2xl flex items-center justify-center  font-bold mb-4">Project Insights</h2>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2  md:grid-cols-3 gap-4">
         {insights.map((insight, index) => (
-          <div key={index} className="!bg-white p-4 rounded-xl shadow-xl text-center">
+          <div key={index} className=" p-4 bg-gray-200 rounded-xl shadow-xl text-center">
             <h3 className="text-lg font-semibold">{insight.title}</h3>
               <p className="text-xl font-bold text-blue-600">
               {insight.isNumeric ? (

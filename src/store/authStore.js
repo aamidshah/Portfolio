@@ -168,10 +168,8 @@ const useAuthStore = create((set,get) => ({
 // },
 signup: async (username, email, password) => {
   try {
-      console.log("🚀 Signup initiated for:", { username, email });
 
       // 1️⃣ Fetch all projects to check if the user is a contributor
-      console.log("🔹 Fetching project contributors...");
       const projectsResponse = await fetch(`${BASE_URL}/projects`);
       
       if (!projectsResponse.ok) {
@@ -179,7 +177,6 @@ signup: async (username, email, password) => {
       }
 
       const projects = await projectsResponse.json();
-      console.log("✅ Projects Data Fetched");
 
       // 2️⃣ Check if the username exists in any project's contributors array
       const isContributor = projects.some((project) =>
@@ -187,22 +184,18 @@ signup: async (username, email, password) => {
           project.contributors.some(contributor => contributor.toLowerCase() === username.toLowerCase())
       );
 
-      console.log(`🔍 Contributor check for '${username}': ${isContributor}`);
 
       if (!isContributor) {
           return { success: false, message: "❌ You are not authorized to register!" };
       }
 
       // 3️⃣ Proceed with Registration
-      console.log("🔹 Sending registration data...");
       const response = await fetch(`${BASE_URL}/auth/register`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, email, password }),
       });
 
-      console.log("🔹 Full API Response:", response);
-      console.log("🔹 Response Status:", response.status);
       const responseText = await response.text(); // Read response as text first
 
       let data;
