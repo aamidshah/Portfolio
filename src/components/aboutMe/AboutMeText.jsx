@@ -30,7 +30,7 @@ const AboutMeText = ({}) => {
     className='border border-orange rounded-full py-2 px-4 text-lg flex items-center mt-10 hover:bg-[var(--orange)] transition-all duration-500 cursor-pointer md:self-start self-center text-white hover:text-[var(--cyan)] '>My Projects</button>
     </Link>
 
-    <a href="https://drive.google.com/uc?export=download&id=1qAjEsR8P55yfMb9A-635DiYUSwTph1Ng" 
+    <a href="resume.pdf" 
 download="Shah_Aamid_Resume.pdf"  
     smooth={true} 
     duration={800} 

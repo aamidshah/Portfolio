@@ -26,6 +26,7 @@ import SkillsMainDash from "./components/dashboard/skills/SkillsMainDash";
 import FullProjectInfo from "./components/projects/FullProjectInfo";
 import SkillForm from "./components/dashboard/skills/SkillForm";
 import SubHeroSection from "./components/SubHeroSection";
+import ProfileInfo from "./components/login/ProfileInfo";
 const DashboardContent = () => {
   const { activeComponent } = useGlobalStateStore(); // Using Zustand store
   console.log("Active Component:", activeComponent); // Debugging
@@ -45,6 +46,7 @@ const DashboardContent = () => {
       {activeComponent === "authScreen" && <AuthForm />}
       {activeComponent === "Skills" && <SkillsMainDash />}
       {activeComponent === "skillForm" && <SkillForm />}
+      {activeComponent === "profile" && <ProfileInfo />}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
+import axios from "axios";
 
 const useAuthStore = create((set,get) => ({
     user: JSON.parse(localStorage.getItem("user")) || null,
@@ -16,6 +17,64 @@ const useAuthStore = create((set,get) => ({
       localStorage.removeItem("auth");
     }
   },
+  
+
+  updateUser: async (updatedData) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return { success: false, message: "User not authenticated." };
+      }
+
+      const response = await fetch(`${BASE_URL}/auth/update`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        return { success: false, message: errorData.message || "Update failed." };
+      }
+
+      const newUserData = await response.json();
+
+      // Update store and localStorage
+      set({ user: newUserData.user });
+      localStorage.setItem("user", JSON.stringify(newUserData.user));
+
+      return { success: true, message: "Profile updated successfully!" };
+    } catch (error) {
+      console.error("Update user error:", error);
+      return { success: false, message: "Something went wrong. Try again!" };
+    }
+  },
+
+verifyPassword: async (password) => {  
+    try {
+        const token = localStorage.getItem("token"); // Retrieve the token
+        if (!token) {
+            return { success: false, message: "User not authenticated." };
+        }
+
+        const response = await axios.post(
+            `${BASE_URL}/auth/verifyprofile`, 
+            { password }, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Send token in header
+                }
+            }
+        );
+
+        return response.data;
+    } catch (error) {
+        return error.response?.data || { success: false, message: "Unauthorized" };
+    }
+},
 
 
   login: async (email, password) => {
@@ -27,8 +86,7 @@ const useAuthStore = create((set,get) => ({
       });
       console.log("Raw response:", response); // Log raw response
 
-    //   const data = await response.json().catch(() => null); // Catch JSON parsing errors
-    //   console.log("Response Data:", data);
+   
       let data;
       try {
         data = await response.json();
@@ -231,6 +289,35 @@ signup: async (username, email, password) => {
       return { success: false, message: "Something went wrong. Try again!" };
   }
 },
+getUser: async () => {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      return { success: false, message: "No authentication token found." };
+    }
+
+    const response = await fetch(`${BASE_URL}/auth/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      return { success: false, message: "Failed to fetch user data." };
+    }
+
+    const userData = await response.json();
+    set({ user: userData.user });
+
+    return { success: true, user: userData.user };
+  } catch (error) {
+    console.error("❌ Error fetching user:", error);
+    return { success: false, message: "An error occurred while fetching user data." };
+  }
+},
+
 
   logout: () => {
     localStorage.removeItem("token");

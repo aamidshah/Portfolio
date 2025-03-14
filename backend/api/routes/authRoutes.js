@@ -1,5 +1,5 @@
 const express = require("express");
-const { register, login, getUserInfo,logout } = require("../controllers/authController");
+const { register, login, getUserInfo,logout,updateProfile,verifyProfile } = require("../controllers/authController");
 const authMiddleware = require("../middleware/AuthUser")
 const { check } = require("express-validator");
 
@@ -18,5 +18,8 @@ router.post(
 router.post("/login", login);
 router.get("/user", authMiddleware, getUserInfo); // Protected route to get user info
 router.post("/logout", authMiddleware, logout); // Protected route to logout
+router.put("/update", authMiddleware, updateProfile); // Protected route to update profile
+router.post("/verifyprofile", authMiddleware, verifyProfile )
+
 
 module.exports = router;

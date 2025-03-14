@@ -103,6 +103,67 @@ exports.getUserInfo = async (req, res) => {
   }
 };
 
+exports.updateProfile = async (req, res) => {
+  try {
+    const { bio, socialLinks, profilePicture, currentPassword, newPassword } = req.body;
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Update profile fields
+    if (bio !== undefined) user.bio = bio;
+    if (socialLinks !== undefined) user.socialLinks = socialLinks;
+    if (profilePicture !== undefined) user.profilePicture = profilePicture;
+
+    // Handle password update
+    if (currentPassword && newPassword) {
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Current password is incorrect." });
+      }
+      user.password = await bcrypt.hash(newPassword, 10);
+    }
+
+    await user.save();
+    res.status(200).json({ message: "Profile updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error. Please try again." });
+  }
+};
+
+exports.verifyProfile = async (req, res) => {
+  try {
+      console.log("Received request to verify password:", req.body);
+      const { password } = req.body;
+      
+      if (!password) {
+          console.log("Password missing from request");
+          return res.status(400).json({ success: false, message: "Password is required" });
+      }
+
+      const user = await User.findById(req.user.id);
+      if (!user) {
+          console.log("User not found");
+          return res.status(404).json({ success: false, message: "User not found" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      console.log("Password match:", isMatch);
+
+      if (!isMatch) {
+          return res.status(401).json({ success: false, message: "Incorrect password" });
+      }
+
+      console.log("Password verified successfully");
+      res.json({ success: true });
+  } catch (error) {
+      console.error("Error verifying password:", error);
+      res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
 
 const tokenBlacklist = new Set(); // Store invalidated tokens in memory (Use Redis for production)
 exports.tokenBlacklist = tokenBlacklist; // ✅ Export tokenBlacklist separately

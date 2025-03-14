@@ -30,6 +30,7 @@ const AuthScreen = () => {
 
       logout(); // ✅ Call Zustand's logout function
       toast.success("Logged out successfully!");
+      setActiveComponent(null);
     } catch (error) {
       console.error("Logout error:", error);
       toast.error("Logout failed. Please try again!");
@@ -42,9 +43,12 @@ const AuthScreen = () => {
     <div className="flex items-center gap-4 cursor-pointer p-4 rounded-md transition">
       {isAuthenticated ? (
         <FaSignOutAlt 
+        size={25}
           className="text-xl text-red-500 hover:text-red-600"
           onClick={handleLogout}
         />
+      
+        
       ) : (
         <FaUser
           className="text-xl text-orange hover:!text-[var(--darkOrange)]"
